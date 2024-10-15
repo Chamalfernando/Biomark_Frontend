@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -32,12 +31,10 @@ class Dog {
   }
 }
 
-
-
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // Open the database and store the reference.
 
   final database = openDatabase(
@@ -56,6 +53,4 @@ void main() async {
     // path to perform database upgrades and downgrades.
     version: 1,
   );
-
 }
-

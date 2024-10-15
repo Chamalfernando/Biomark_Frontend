@@ -21,7 +21,7 @@ class RouteHandler extends StatelessWidget {
         //   print("Arguments is not a list");
         // }
         switch (settings.name) {
-          case "/":
+          case "/login":
             return MaterialPageRoute(
               builder: (context) => LoginScreen(),
             );
