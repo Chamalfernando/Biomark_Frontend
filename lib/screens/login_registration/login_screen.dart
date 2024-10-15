@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(
                   height: 20,
-                ), // Space between Password and Button
+                ),
                 // Login Button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -148,10 +148,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  // Example of clickable "Forgot Your Password?" text
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "/forgotpasswordscreen");
+                      Navigator.pushNamed(
+                        context,
+                        "/forgotpasswordscreen",
+                      );
                     },
                     child: const Text(
                       'Forgot Your Password?',
@@ -176,8 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Login Failed?',
                       style: TextStyle(
                         color: Colors.red,
-                        decoration: TextDecoration
-                            .underline, // Underline the text to make it look like a link
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
@@ -205,8 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 // Horizontal line (Divider) with specific width
                 SizedBox(
-                  width: MediaQuery.of(context).size.width *
-                      0.9, // 90% of screen width
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: const Divider(
                     color: Colors.black,
                     thickness: 2,

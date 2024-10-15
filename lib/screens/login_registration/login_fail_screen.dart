@@ -94,7 +94,10 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "/forgotpasswordscreen");
+                      Navigator.pushNamed(
+                        context,
+                        "/forgotpasswordscreen",
+                      );
                     },
                     child: const Text(
                       'Forgot Your Password?',
@@ -105,22 +108,6 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                     ),
                   ),
                 ),
-                // const SizedBox(height: 10),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       Navigator.pushNamed(context, "/recoveraccscreen");
-                //     },
-                //     child: const Text(
-                //       'Recover Account?',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //         decoration: TextDecoration.underline,
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -148,11 +135,12 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.black, // Button color (000000)
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15), // Button size
+                      horizontal: 40,
+                      vertical: 15,
+                    ), // Button size
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    iconColor: Color(0xFFFFFFFF),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(
