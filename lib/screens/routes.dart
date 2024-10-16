@@ -2,7 +2,9 @@ import 'package:biomark/screens/account_recovery/account_recovery_screen.dart';
 import 'package:biomark/screens/login_registration/login_fail_screen.dart';
 import 'package:biomark/screens/login_registration/login_screen.dart';
 import 'package:biomark/screens/login_registration/registration_screen.dart';
-import 'package:biomark/screens/password_change/forgot_password_screen.dart';
+import 'package:biomark/screens/login_registration/securityquestions_screen.dart';
+import 'package:biomark/screens/password_change/forgot_password_init_screen.dart';
+import 'package:biomark/screens/password_change/forgot_password_second_screen.dart';
 import 'package:biomark/screens/profile_and_pac/pac_creation_screen.dart';
 import 'package:biomark/screens/profile_and_pac/pac_screen.dart';
 import 'package:biomark/screens/profile_and_pac/profile_screen.dart';
@@ -21,7 +23,7 @@ class RouteHandler extends StatelessWidget {
         //   print("Arguments is not a list");
         // }
         switch (settings.name) {
-          case "/":
+          case "/login":
             return MaterialPageRoute(
               builder: (context) => LoginScreen(),
             );
@@ -33,9 +35,17 @@ class RouteHandler extends StatelessWidget {
             return MaterialPageRoute(
               builder: (context) => RegistrationScreen(),
             );
+          case "/securityquestscreen":
+            return MaterialPageRoute(
+              builder: (context) => SecurityquestionsScreen(),
+            );
           case "/forgotpasswordscreen":
             return MaterialPageRoute(
-              builder: (context) => ForgotPassWordScreen(),
+              builder: (context) => ForgotPassWordInitScreen(),
+            );
+          case "/forgotpwsecondscreen":
+            return MaterialPageRoute(
+              builder: (context) => ForgotPasswordSecondScreen(),
             );
           case "/recoveraccscreen":
             return MaterialPageRoute(
