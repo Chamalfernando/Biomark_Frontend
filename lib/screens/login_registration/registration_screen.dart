@@ -1,4 +1,5 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 // import '../../models/user.dart';
 // import '../../services/database_helper.dart';
@@ -64,12 +65,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: AppColors.topicGreen,
-                    ),
+                  const CommonTopic(
+                    topic: "Sign Up",
                   ),
                   const SizedBox(
                     height: 20,

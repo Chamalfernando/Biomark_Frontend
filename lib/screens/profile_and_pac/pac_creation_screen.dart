@@ -1,3 +1,4 @@
+import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
 class PACCreatingScreen extends StatefulWidget {
@@ -10,6 +11,20 @@ class PACCreatingScreen extends StatefulWidget {
 class _PACCreatingScreenState extends State<PACCreatingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PAC Creation'),
+        backgroundColor: AppColors.primaryGreen,
+        centerTitle: true,
+      ),
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [],
+          ),
+        ),
+      ),
+    );
   }
 }
