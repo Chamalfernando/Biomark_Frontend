@@ -1,4 +1,5 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 
 class AccountRecoveryScreen extends StatefulWidget {
@@ -36,12 +37,8 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                "Account Recovery",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: AppColors.topicGreen,
-                ),
+              const CommonTopic(
+                topic: "Account Recovery",
               ),
               const SizedBox(
                 height: 20,

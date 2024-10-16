@@ -1,4 +1,5 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 
 class SecurityquestionsScreen extends StatefulWidget {
@@ -39,12 +40,8 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                "Security Questions",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: AppColors.topicGreen,
-                ),
+              const CommonTopic(
+                topic: "Security Questions",
               ),
               const SizedBox(
                 height: 20,
