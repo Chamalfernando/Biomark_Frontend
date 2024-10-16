@@ -1,24 +1,27 @@
 import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
-class AccountRecoveryScreen extends StatefulWidget {
-  const AccountRecoveryScreen({super.key});
+class SecurityquestionsScreen extends StatefulWidget {
+  const SecurityquestionsScreen({super.key});
 
   @override
-  State<AccountRecoveryScreen> createState() => _AccountRecoveryScreenState();
+  State<SecurityquestionsScreen> createState() =>
+      _SecurityquestionsScreenState();
 }
 
-class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController dobController = TextEditingController();
-  final TextEditingController friendNameController = TextEditingController();
-  final TextEditingController petNameController = TextEditingController();
+class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
+  final TextEditingController mMaidenNameController = TextEditingController();
+  final TextEditingController childrBestFriendNameController =
+      TextEditingController();
+  final TextEditingController childPetNameController = TextEditingController();
+  final TextEditingController customQuestController = TextEditingController();
+  final TextEditingController customAnsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Recovery'),
+        title: const Text('Security Questions'),
         backgroundColor: AppColors.primaryGreen,
         centerTitle: true,
       ),
@@ -37,7 +40,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                 height: 40,
               ),
               const Text(
-                "Account Recovery",
+                "Security Questions",
                 style: TextStyle(
                   fontSize: 25.0,
                   color: AppColors.topicGreen,
@@ -46,20 +49,20 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                "Answer to following security questions",
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: AppColors.errorRed,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // const Text(
+              //   "Answer to following security questions",
+              //   style: TextStyle(
+              //     fontSize: 20.0,
+              //     color: AppColors.errorRed,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "1. Full Name Given Previously",
+                  "1. Mother’s Maiden Name",
                   style: TextStyle(
                     fontSize: 15.0,
                     color: AppColors.black,
@@ -70,9 +73,9 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                 height: 10,
               ),
               TextField(
-                controller: fullNameController,
+                controller: mMaidenNameController,
                 decoration: InputDecoration(
-                  labelText: "Full Name",
+                  // labelText: "Full Name",
                   fillColor: AppColors.primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
@@ -89,7 +92,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "2. Date of Birth Given Previously",
+                  "2. Childhood Best Friend's Name",
                   style: TextStyle(
                     fontSize: 15.0,
                     color: AppColors.black,
@@ -100,9 +103,9 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                 height: 10,
               ),
               TextField(
-                controller: dobController,
+                controller: childrBestFriendNameController,
                 decoration: InputDecoration(
-                  labelText: "Date of Birth",
+                  // labelText: "Date of Birth",
                   fillColor: AppColors.primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
@@ -119,7 +122,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "3. Childhood Best Friend's Name Given Previously",
+                  "3. Childhood Pet's Name",
                   style: TextStyle(
                     fontSize: 15.0,
                     color: AppColors.black,
@@ -130,9 +133,9 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                 height: 10,
               ),
               TextField(
-                controller: friendNameController,
+                controller: childPetNameController,
                 decoration: InputDecoration(
-                  labelText: "Childhood Best Friend's Name",
+                  // labelText: "Childhood Best Friend's Name",
                   fillColor: AppColors.primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
@@ -149,7 +152,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "4. Childhood Pet's Name Given Previously",
+                  "4. Your Custom Question & Answer",
                   style: TextStyle(
                     fontSize: 15.0,
                     color: AppColors.black,
@@ -160,9 +163,26 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                 height: 10,
               ),
               TextField(
-                controller: petNameController,
+                controller: customQuestController,
                 decoration: InputDecoration(
-                  labelText: "Childhood Pet's Name",
+                  labelText: "Question",
+                  fillColor: AppColors.primaryGreen,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                style: const TextStyle(
+                  height: 2.5,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                controller: customAnsController,
+                decoration: InputDecoration(
+                  labelText: "Answer",
                   fillColor: AppColors.primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(

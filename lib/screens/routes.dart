@@ -2,6 +2,7 @@ import 'package:biomark/screens/account_recovery/account_recovery_screen.dart';
 import 'package:biomark/screens/login_registration/login_fail_screen.dart';
 import 'package:biomark/screens/login_registration/login_screen.dart';
 import 'package:biomark/screens/login_registration/registration_screen.dart';
+import 'package:biomark/screens/login_registration/securityquestions_screen.dart';
 import 'package:biomark/screens/password_change/forgot_password_init_screen.dart';
 import 'package:biomark/screens/password_change/forgot_password_second_screen.dart';
 import 'package:biomark/screens/profile_and_pac/pac_creation_screen.dart';
@@ -33,6 +34,10 @@ class RouteHandler extends StatelessWidget {
           case "/registrationscreen":
             return MaterialPageRoute(
               builder: (context) => RegistrationScreen(),
+            );
+          case "/securityquestscreen":
+            return MaterialPageRoute(
+              builder: (context) => SecurityquestionsScreen(),
             );
           case "/forgotpasswordscreen":
             return MaterialPageRoute(
