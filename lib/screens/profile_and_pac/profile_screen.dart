@@ -261,6 +261,31 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       ),
                     ),
                   ),
+                  AppSizes.size20,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.errorRed,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   "/pacscreen",
+                      // );
+                    },
+                    child: const Text(
+                      "Unsubscribe",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
