@@ -64,6 +64,25 @@ class PACScreen extends StatelessWidget {
                 topic: "PAC",
               ),
               AppSizes.size40,
+              /**
+               * 
+               * text - "Currently We don’t have any 
+                    prediction models built from 
+                    our organization." - smsblue color
+                AppSizes.size20
+
+
+                Text - "Subscribe to our service for 
+provide additional information" - black color - size25
+
+                Elevated Button - Subscribe - black color
+
+                Text - "Currently addtional detail providing is under maintenance."
+
+                horizontal line 
+
+                Elevated Button - Go to profile.
+               */
             ],
           ),
         ),

@@ -60,6 +60,22 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                     color: Colors.white,
                   ),
                 ),
+
+                /**
+                 * have to be included 
+                 * 
+                 * 1. Date of Birth text & TextField - most suitable if it is a calendar
+                 * 2. Time of Birth text & TextField - most suitable if it has a great way to choose.
+                 * 3. Location of Birth text & TextField
+                 * 4. Blood Group - most suitable a menu
+                 * 5. Sex - most suitable if a menu
+                 * 6. Height text & textField
+                 * 7. Ethnicity text & TextField
+                 * 8. Eye Color - text & TextField
+                 * 
+                 * at the bottom there should have the Elevated Button named "Create"
+                 * It should then navigate to the PAC Account dashboard and there has to be an elevated button named "profile".
+                 */
               ),
             ],
           ),
