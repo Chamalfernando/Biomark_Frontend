@@ -23,29 +23,27 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Security Questions'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              boxSIZED_20,
               const CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/BioMark.png'),
+                backgroundImage: AssetImage(
+                  'assets/BioMark.png',
+                ),
               ),
-              const SizedBox(
-                height: 40,
-              ),
+              boxSIZED_40,
               const CommonTopic(
                 topic: "Security Questions",
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              boxSIZED_20,
               // const Text(
               //   "Answer to following security questions",
               //   style: TextStyle(
@@ -62,18 +60,16 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   "1. Mother’s Maiden Name",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: mMaidenNameController,
                 decoration: InputDecoration(
                   // labelText: "Full Name",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -83,27 +79,23 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "2. Childhood Best Friend's Name",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: childrBestFriendNameController,
                 decoration: InputDecoration(
                   // labelText: "Date of Birth",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -113,27 +105,23 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "3. Childhood Pet's Name",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: childPetNameController,
                 decoration: InputDecoration(
                   // labelText: "Childhood Best Friend's Name",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -143,27 +131,23 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "4. Your Custom Question & Answer",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: customQuestController,
                 decoration: InputDecoration(
                   labelText: "Question",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -173,14 +157,12 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: customAnsController,
                 decoration: InputDecoration(
                   labelText: "Answer",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -190,14 +172,12 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              boxSIZED_25,
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.black,
+                    backgroundColor: black,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 40, vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -213,7 +193,7 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   child: const Text(
                     "Enter",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: whiteColor,
                     ),
                   ),
                 ),

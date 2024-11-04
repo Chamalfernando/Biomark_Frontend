@@ -10,23 +10,23 @@ class PACScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PAC'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              AppSizes.size10,
+              boxSIZED_10,
               Column(
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.logoutColor,
+                        backgroundColor: logoutColor,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40,
                           vertical: 15,
@@ -44,14 +44,14 @@ class PACScreen extends StatelessWidget {
                       child: const Text(
                         "Logout",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              AppSizes.size40,
+              boxSIZED_40,
               const Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
@@ -59,11 +59,11 @@ class PACScreen extends StatelessWidget {
                   backgroundImage: AssetImage('assets/profileImg.png'),
                 ),
               ),
-              AppSizes.size20,
+              boxSIZED_20,
               const CommonTopic(
                 topic: "PAC",
               ),
-              AppSizes.size40,
+              boxSIZED_40,
               /**
                * 
                * text - "Currently We don’t have any 

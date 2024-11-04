@@ -20,57 +20,49 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account Recovery'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              boxSIZED_20,
               const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/BioMark.png'),
               ),
-              const SizedBox(
-                height: 40,
-              ),
+              boxSIZED_40,
               const CommonTopic(
                 topic: "Account Recovery",
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              boxSIZED_20,
               const Text(
                 "Answer to following security questions",
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: AppColors.errorRed,
+                  color: errorRed,
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              boxSIZED_20,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "1. Full Name Given Previously",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: fullNameController,
                 decoration: InputDecoration(
                   labelText: "Full Name",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -80,27 +72,23 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "2. Date of Birth Given Previously",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: dobController,
                 decoration: InputDecoration(
                   labelText: "Date of Birth",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -110,27 +98,23 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "3. Childhood Best Friend's Name Given Previously",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: friendNameController,
                 decoration: InputDecoration(
                   labelText: "Childhood Best Friend's Name",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -140,27 +124,23 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              boxSIZED_15,
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "4. Childhood Pet's Name Given Previously",
                   style: TextStyle(
                     fontSize: 15.0,
-                    color: AppColors.black,
+                    color: black,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              boxSIZED_10,
               TextField(
                 controller: petNameController,
                 decoration: InputDecoration(
                   labelText: "Childhood Pet's Name",
-                  fillColor: AppColors.primaryGreen,
+                  fillColor: primaryGreen,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -170,16 +150,16 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                   height: 2.5,
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              boxSIZED_25,
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.black,
+                    backgroundColor: black,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
+                      horizontal: 40,
+                      vertical: 15,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -193,7 +173,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                   child: const Text(
                     "Enter",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: whiteColor,
                     ),
                   ),
                 ),

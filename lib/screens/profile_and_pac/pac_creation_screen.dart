@@ -15,31 +15,31 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('PAC Creation'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              AppSizes.size10,
+              boxSIZED_10,
               const CommonTopic(
                 topic: "PAC Creation",
               ),
-              AppSizes.size40,
+              boxSIZED_40,
               const Text(
                 "Answer Following Questions for our Predictive Model building Project. By Doing this You would get awesome benefits in the long run.",
                 style: TextStyle(
                   fontSize: 15.0,
-                  color: AppColors.smsResendBlue,
+                  color: smsResendBlue,
                 ),
               ),
-              AppSizes.size20,
+              boxSIZED_20,
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.logoutColor,
+                  backgroundColor: logoutColor,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40,
                     vertical: 15,
@@ -57,7 +57,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                 child: const Text(
                   "PAC",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: whiteColor,
                   ),
                 ),
 

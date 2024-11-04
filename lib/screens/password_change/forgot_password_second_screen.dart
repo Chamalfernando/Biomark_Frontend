@@ -20,48 +20,44 @@ class _ForgotPasswordSecondScreenState
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forgot Password 2'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Column(
               children: [
-                const SizedBox(height: 20),
+                boxSIZED_20,
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/BioMark.png'),
+                  backgroundImage: AssetImage(
+                    'assets/BioMark.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 const Text(
                   "Final Step",
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: AppColors.errorRed,
+                    color: errorRed,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Enter your new password here",
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                boxSIZED_10,
                 TextField(
                   controller: passwordController,
                   decoration: InputDecoration(
                     labelText: "Password",
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -71,23 +67,19 @@ class _ForgotPasswordSecondScreenState
                     height: 2.5,
                   ),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_25,
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "ReEnter your new password here",
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                boxSIZED_10,
                 TextField(
                   controller: reTypePasswordController,
                   decoration: InputDecoration(
                     labelText: "Retype Password",
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -97,14 +89,12 @@ class _ForgotPasswordSecondScreenState
                     height: 2.5,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                boxSIZED_20,
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.black,
+                      backgroundColor: black,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
                         vertical: 15,
@@ -122,15 +112,13 @@ class _ForgotPasswordSecondScreenState
                     child: const Text(
                       "Enter",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                       ),
                     ),
                   ),
                 ),
 
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_25,
                 // Align(
                 //   alignment: Alignment.centerLeft,
                 //   child: GestureDetector(
