@@ -15,25 +15,6 @@ String? validateEmail(String? value) {
   return null; // If email is valid
 }
 
-String? validateUsername(String? value) {
-  // Basic null/empty check
-  if (value == null || value.isEmpty) {
-    return 'Please enter your username';
-  }
-
-  // Ensure username has at least 8 characters
-  if (value.length < 8) {
-    return 'Username must be at least 8 characters long';
-  }
-
-  // Ensure first character is not a number
-  if (RegExp(r'^[0-9]').hasMatch(value)) {
-    return 'Username cannot start with a number';
-  }
-
-  return null; // If username is valid
-}
-
 String? validatePassword(String? value) {
   // Basic null/empty check
   if (value == null || value.isEmpty) {
@@ -66,4 +47,60 @@ String? validatePassword(String? value) {
   }
 
   return null; // If password meets all criteria
+}
+
+String? validateFirstName(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your first name';
+  }
+
+  // Check if the first name contains any spaces
+  if (value.contains(' ')) {
+    return 'First name should not contain spaces';
+  }
+
+  return null; // Return null if valid
+}
+
+String? validateLastName(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your last name';
+  }
+
+  // Check if the last name contains any spaces
+  if (value.contains(' ')) {
+    return 'Last name should not contain spaces';
+  }
+
+  return null; // Return null if valid
+}
+
+String? validateFullName(String? value, String firstName, String lastName) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your full name';
+  }
+
+  // Ensure the full name contains both the first and last names as words
+  if (!value.toLowerCase().contains(firstName.toLowerCase()) ||
+      !value.toLowerCase().contains(lastName.toLowerCase())) {
+    return 'Full name must include both first and last names';
+  }
+
+  return null; // Return null if valid
+}
+
+String? validateDOB(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your date of birth';
+  }
+
+  // Regular expression to match the format dd/MM/yyyy
+  final RegExp dateRegExp =
+      RegExp(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/([0-9]{4})$');
+
+  if (!dateRegExp.hasMatch(value)) {
+    return 'Please enter a valid date (dd/MM/yyyy)';
+  }
+
+  return null; // Return null if valid
 }

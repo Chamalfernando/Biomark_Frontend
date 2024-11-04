@@ -41,8 +41,16 @@ class RouteHandler extends StatelessWidget {
               builder: (context) => RegistrationScreen(),
             );
           case "/securityquestscreen":
+            final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
-              builder: (context) => SecurityquestionsScreen(),
+              builder: (context) => SecurityQuestionsScreen(
+                firstName: args['firstName'],
+                lastName: args['lastName'],
+                email: args['email'],
+                dob: args['dob'],
+                fullName: args['fullName'],
+                passWord: args['pw'],
+              ),
             );
           case "/forgotpasswordscreen":
             return MaterialPageRoute(

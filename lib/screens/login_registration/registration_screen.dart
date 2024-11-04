@@ -1,6 +1,9 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // For date formatting
+
 // import '../../models/user.dart';
 // import '../../services/database_helper.dart';
 
@@ -18,6 +21,30 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController dobController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _registrationFormGlobalKey = GlobalKey<FormState>();
+
+  bool _obscurePassword = false; // Track the visibility state of the password
+
+  // Function to show DatePicker and handle selected date
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(), // Current date as default
+      firstDate: DateTime(1900), // Start date limit
+      lastDate: DateTime.now(), // End date limit
+    );
+
+    if (pickedDate != null) {
+      // Format the selected date
+      String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+      setState(
+        () {
+          dobController.text =
+              formattedDate; // Update the TextFormField with selected date
+        },
+      );
+    }
+  }
 
   // void _register() async {
   //   String name = nameController.text;
@@ -80,124 +107,219 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                   boxSIZED_10,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "First Name",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "Last Name",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "Full Name",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "Date Of Birth",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: black,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 40,
-                            vertical: 15,
+                  Form(
+                    key: _registrationFormGlobalKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: firstNameController,
+                          decoration: InputDecoration(
+                            labelText: "First Name",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person,
+                            ),
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          style: const TextStyle(
+                            height: 2.5,
                           ),
+                          validator: (value) => validateFirstName(value),
+                          onSaved: (value) {
+                            firstNameController.text = value!;
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            "/securityquestscreen",
-                          );
-                        },
-                        child: const Text(
-                          "Next",
-                          style: TextStyle(
-                            color: whiteColor,
+                        boxSIZED_15,
+                        TextFormField(
+                          controller: lastNameController,
+                          decoration: InputDecoration(
+                            labelText: "Last Name",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person_2,
+                            ),
                           ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          validator: (value) => validateLastName(value),
+                          onSaved: (value) {
+                            lastNameController.text = value!;
+                          },
                         ),
-                      ),
-                    ],
+                        boxSIZED_15,
+                        TextFormField(
+                          controller: fullNameController,
+                          decoration: InputDecoration(
+                            labelText: "Full Name",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person_3,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          onSaved: (value) {
+                            fullNameController.text = value!;
+                          },
+                          validator: (value) {
+                            return validateFullName(
+                                value,
+                                firstNameController.text,
+                                lastNameController.text);
+                          },
+                        ),
+                        boxSIZED_15,
+                        TextFormField(
+                          controller: dobController,
+                          keyboardType: TextInputType.datetime,
+                          decoration: InputDecoration(
+                            labelText: "Date Of Birth",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: IconButton(
+                              icon: const Icon(Icons.calendar_today),
+                              onPressed: () {
+                                _selectDate(
+                                    context); // Open the date picker when the icon is tapped
+                              },
+                            ),
+                          ),
+                          // readOnly: true, // Prevent user from manually editing the date
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          onSaved: (value) {
+                            dobController.text = value!;
+                          },
+                          validator: (value) => validateDOB(value),
+                        ),
+                        boxSIZED_15,
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.email,
+                            ),
+                          ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          onSaved: (value) {
+                            emailController.text = value!;
+                          },
+                          validator: validateEmail,
+                        ),
+                        boxSIZED_15,
+                        TextFormField(
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Change the icon based on the password visibility state
+                                _obscurePassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                          ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          obscureText: !_obscurePassword,
+                          showCursor: true,
+                          validator: validatePassword,
+                          onSaved: (value) {
+                            passwordController.text = value!;
+                          },
+                        ),
+                        boxSIZED_15,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: black,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40,
+                                  vertical: 15,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (_registrationFormGlobalKey.currentState!
+                                    .validate()) {
+                                  _registrationFormGlobalKey.currentState!
+                                      .save();
+                                  // _registrationFormGlobalKey.currentState!
+                                  //     .reset();
+
+                                  // Navigate to SecurityQuestionsScreen with the collected form data
+                                  Navigator.pushNamed(
+                                    context,
+                                    "/securityquestscreen",
+                                    arguments: {
+                                      'firstName': firstNameController.text,
+                                      'lastName': lastNameController.text,
+                                      'fullName': fullNameController.text,
+                                      'dob': dobController.text,
+                                      'email': emailController.text,
+                                      'pw': passwordController.text,
+                                    },
+                                  );
+                                  // setState(() {
+                                  //   // logic to handle login with databases.
+                                  // });
+                                }
+                              },
+                              child: const Text(
+                                "Next",
+                                style: TextStyle(
+                                  color: whiteColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
