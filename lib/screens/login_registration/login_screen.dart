@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 // import '../../services/database_helper.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -16,7 +18,53 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   final _loginFormGlobalKey = GlobalKey<FormState>();
 
-  bool _obscurePassword = true; // Track the visibility state of the password
+  bool _obscurePassword = false; // Track the visibility state of the password
+  bool _isFormDisabled = false;
+  int _failedAttempts = 0;
+  final int _maxLoginAttempts = 3; // Maximum login attempts allowed
+
+  // Function to authenticate user with SQLite database
+  // Future<bool> _authenticateUser(String email, String password) async {
+  //   var dbHelper = DatabaseHelper.instance;
+  //   var user = await dbHelper.getUser(email, password);
+  //   return user != null; // Returns true if user exists, false otherwise
+  // }
+
+  // Function to handle login attempt
+  // void _handleLogin() async {
+  //   if (_loginFormGlobalKey.currentState!.validate()) {
+  //     // Get email and password from controllers
+  //     String email = emailController.text;
+  //     String password = passwordController.text;
+  //
+  //     // Authenticate with SQLite
+  //     bool isAuthenticated = await _authenticateUser(email, password);
+  //
+  //     if (isAuthenticated) {
+  //       // If authenticated, reset form and navigate to the profile page
+  //       _loginFormGlobalKey.currentState!.reset();
+  //       Navigator.pushReplacementNamed(context, "/normalprofilescreen");
+  //     } else {
+  //       // Increment failed attempts count
+  //       setState(() {
+  //         _failedAttempts += 1;
+  //       });
+  //
+  //       if (_failedAttempts >= _maxLoginAttempts) {
+  //         // If 3 failed attempts, disable the form and navigate to login failure page
+  //         setState(() {
+  //           _isFormDisabled = true;
+  //         });
+  //         Navigator.pushReplacementNamed(context, "/loginfailscreen");
+  //       } else {
+  //         // Show a snackbar for incorrect credentials
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Invalid email or password')),
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
 
   // void _login() async {
   //   String email = emailController.text;
@@ -61,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Space between image and fields
                   boxSIZED_40,
                   const CommonTopic(
-                    topic: "Welcom to Biomark",
+                    topic: "Welcome to Biomark",
                   ),
                   // Space between image and fields
                   boxSIZED_40,
@@ -72,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Email TextFormField
                         TextFormField(
                           controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelText: "Email",
                             fillColor: primaryGreen,
@@ -83,8 +132,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: const TextStyle(
                             height: 2.5,
                           ),
+                          enabled: !_isFormDisabled, // Disable if max attempts reached
                           validator: validateEmail,
-                          onSaved: (value) {},
+                          onSaved: (value) {
+                            emailController.text = value!;
+                          },
                         ),
                         // Space between Email and Password fields
                         boxSIZED_20,
@@ -107,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     : Icons.visibility_off,
                               ),
                               onPressed: () {
-                                // Toggle the password visibility state
                                 setState(() {
                                   _obscurePassword = !_obscurePassword;
                                 });
@@ -120,6 +171,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: !_obscurePassword,
                           showCursor: true,
                           validator: validatePassword,
+                          onSaved: (value) {
+                            passwordController.text = value!;
+                          }
                         ),
                         boxSIZED_20,
                         // Login Button
@@ -135,8 +189,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: () {
+                            // _isFormDisabled ? null : _handleLogin; // Disable button if form is disabled
                             if (_loginFormGlobalKey.currentState!.validate()) {
                               _loginFormGlobalKey.currentState!.save();
+                              // Navigator.pushReplacementNamed(
+                              //   context,
+                              //   "/normalprofilescreen",
+                              // );
+                              _loginFormGlobalKey.currentState!.reset();
                               Navigator.pushNamed(
                                 context,
                                 "/normalprofilescreen",

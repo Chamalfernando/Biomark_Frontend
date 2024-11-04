@@ -2,15 +2,30 @@ import 'package:biomark/resources/theme.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 
-class SecurityquestionsScreen extends StatefulWidget {
-  const SecurityquestionsScreen({super.key});
+class SecurityQuestionsScreen extends StatefulWidget {
+  final String firstName;
+  final String lastName;
+  final String fullName;
+  final String dob;
+  final String email;
+  final String passWord;
+
+  const SecurityQuestionsScreen({
+    super.key,
+    required this.firstName,
+    required this.lastName,
+    required this.fullName,
+    required this.dob,
+    required this.email,
+    required this.passWord,
+  });
 
   @override
-  State<SecurityquestionsScreen> createState() =>
-      _SecurityquestionsScreenState();
+  State<SecurityQuestionsScreen> createState() =>
+      _SecurityQuestionsScreenState();
 }
 
-class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
+class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
   final TextEditingController mMaidenNameController = TextEditingController();
   final TextEditingController childrBestFriendNameController =
       TextEditingController();
@@ -40,6 +55,12 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                 ),
               ),
               boxSIZED_40,
+              // Text('First Name: ${widget.firstName}'),
+              // Text('Last Name: ${widget.lastName}'),
+              // Text('Email: ${widget.fullName}'),
+              // Text('Date of Birth: ${widget.dob}'),
+              // Text('Email: ${widget.email}'),
+              // Text('PassWord: ${widget.passWord}'),
               const CommonTopic(
                 topic: "Security Questions",
               ),
@@ -187,7 +208,7 @@ class _SecurityquestionsScreenState extends State<SecurityquestionsScreen> {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      "/normalprofilescreen",
+                      "/login",
                     );
                   },
                   child: const Text(
