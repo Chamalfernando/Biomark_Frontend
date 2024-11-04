@@ -1,13 +1,11 @@
 import 'package:biomark/resources/theme.dart';
 import 'package:biomark/services/validator_functions.dart';
-import 'package:biomark/widgets/TextFormField.dart';
+// import 'package:biomark/widgets/TextFormField.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 // import '../../services/database_helper.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
