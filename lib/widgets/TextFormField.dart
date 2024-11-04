@@ -2,8 +2,9 @@ import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
-  final String controller;
+  final TextEditingController controller;
   final String labelText;
+
   const CustomTextField({
     Key? key,
     required this.controller,
@@ -34,6 +35,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       style: const TextStyle(
         height: 2.5,
       ),
+      validator: (value) {
+        return null;
+      },
     );
   }
 }
