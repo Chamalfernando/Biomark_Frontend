@@ -18,48 +18,44 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Forgot Password 1'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Column(
               children: [
-                const SizedBox(height: 20),
+                boxSIZED_20,
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/BioMark.png'),
+                  backgroundImage: AssetImage(
+                    'assets/BioMark.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 const Text(
                   "Forgot Password ?",
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: AppColors.errorRed,
+                    color: errorRed,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Provide your email and we'll send a six digit code to verify.",
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                boxSIZED_10,
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
                     labelText: "Email",
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -70,14 +66,12 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                   ),
                   // have to implement logic for the email validation and email retrieval part.
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                boxSIZED_20,
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.black,
+                      backgroundColor: black,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
                         vertical: 15,
@@ -94,27 +88,23 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                     child: const Text(
                       "Enter",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                       ),
                     ),
                   ),
                 ),
                 // Login Button
 
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_25,
 
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: const Divider(
-                    color: Colors.black,
+                    color: black,
                     thickness: 2,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                boxSIZED_10,
                 Row(
                   children: [
                     const Text(
@@ -127,21 +117,19 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                       child: const Text(
                         'Resend Email',
                         style: TextStyle(
-                          color: AppColors.smsResendBlue,
+                          color: smsResendBlue,
                           decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
+                boxSIZED_15,
                 TextField(
                   controller: smsController,
                   decoration: InputDecoration(
                     labelText: "Enter Code here",
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -152,16 +140,16 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                   ),
                 ),
 
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_25,
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.black,
+                      backgroundColor: black,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -174,7 +162,7 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                     },
                     child: const Icon(
                       Icons.arrow_forward,
-                      color: Colors.white,
+                      color: whiteColor,
                     ),
                   ),
                 ),

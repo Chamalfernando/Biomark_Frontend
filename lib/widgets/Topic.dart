@@ -14,7 +14,7 @@ class CommonTopic extends StatelessWidget {
       topic,
       style: const TextStyle(
         fontSize: 25.0,
-        color: AppColors.topicGreen,
+        color: topicGreen,
       ),
     );
   }

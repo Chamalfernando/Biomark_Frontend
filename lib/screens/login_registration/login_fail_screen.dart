@@ -13,43 +13,43 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: AppColors.primaryGreen,
+        title: const Text(
+          'Login',
+        ),
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Column(
               children: [
-                const SizedBox(height: 20),
+                boxSIZED_20,
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/BioMark.png'),
+                  backgroundImage: AssetImage(
+                    'assets/BioMark.png',
+                  ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 const Text(
                   "Too many Failed Attempts !!",
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: AppColors.errorRed,
+                    color: errorRed,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                boxSIZED_40,
                 TextField(
                   decoration: InputDecoration(
                     labelText: "Email",
                     labelStyle: const TextStyle(
-                      color: AppColors.errorRed,
+                      color: errorRed,
                       decoration: TextDecoration.lineThrough,
                     ),
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -61,17 +61,15 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   ),
                   enabled: false,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                boxSIZED_20,
                 TextField(
                   decoration: InputDecoration(
                     labelText: "Password",
                     labelStyle: const TextStyle(
-                      color: AppColors.errorRed,
+                      color: errorRed,
                       decoration: TextDecoration.lineThrough,
                     ),
-                    fillColor: AppColors.primaryGreen,
+                    fillColor: primaryGreen,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -84,12 +82,8 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   enabled: false,
                   obscureText: true,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_20,
+                boxSIZED_25,
                 Align(
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
@@ -102,38 +96,32 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                     child: const Text(
                       'Forgot Your Password?',
                       style: TextStyle(
-                        color: Colors.red,
+                        color: commonRed,
                         decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
+                boxSIZED_15,
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: const Divider(
-                    color: Colors.black,
+                    color: black,
                     thickness: 2,
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
+                boxSIZED_15,
                 const Text(
                   'New to Biomark?',
                   style: TextStyle(
-                    color: Colors.red,
+                    color: commonRed,
                     // decoration: TextDecoration.underline,
                   ),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
+                boxSIZED_25,
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.black, // Button color (000000)
+                    backgroundColor: black, // Button color (000000)
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40,
                       vertical: 15,
@@ -151,7 +139,7 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   child: const Text(
                     "SignUp",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: whiteColor,
                     ),
                   ),
                 ),

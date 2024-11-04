@@ -36,10 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -47,28 +47,27 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Column(
                 children: [
-                  const SizedBox(height: 20), // Space between appBar and image
+                  // Space between appBar and image
+                  boxSIZED_20,
                   // rounded image
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
                         'assets/BioMark.png'), // Assuming you have the image in assets folder
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ), // Space between image and fields
+                  // Space between image and fields
+                  boxSIZED_40,
                   const CommonTopic(
                     topic: "Welcom to Biomark",
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ), // Space between image and fields
+                  // Space between image and fields
+                  boxSIZED_40,
                   // Email TextField
                   TextField(
                     controller: emailController,
                     decoration: InputDecoration(
                       labelText: "Email",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -78,15 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ), // Space between Email and Password fields
+                  // Space between Email and Password fields
+                  boxSIZED_20,
                   // Password TextField
                   TextField(
                     controller: passwordController,
                     decoration: InputDecoration(
                       labelText: "Password",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -114,13 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         _obscurePassword, // control password visibility
                     showCursor: true,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  boxSIZED_20,
                   // Login Button
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.loginRegistColor,
+                      backgroundColor: loginRegistColor,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
                         vertical: 15,
@@ -138,13 +134,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
+                  boxSIZED_25,
                   Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
@@ -157,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         'Forgot Your Password?',
                         style: TextStyle(
-                          color: Colors.red,
+                          color: commonRed,
                           decoration: TextDecoration
                               .underline, // Underline the text to make it look like a link
                         ),
@@ -171,38 +165,40 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/loginfailscreen");
+                        Navigator.pushNamed(
+                          context,
+                          "/loginfailscreen",
+                        );
                       },
                       child: const Text(
                         'Login Failed?',
                         style: TextStyle(
-                          color: Colors.red,
+                          color: commonRed,
                           decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  boxSIZED_10,
                   Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/recoveraccscreen");
+                        Navigator.pushNamed(
+                          context,
+                          "/recoveraccscreen",
+                        );
                       },
                       child: const Text(
                         'Recover Account?',
                         style: TextStyle(
-                          color: Colors.red,
+                          color: commonRed,
                           decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   // Horizontal line (Divider) with specific width
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -211,23 +207,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       thickness: 2,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   const Text(
                     'New to Biomark?',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: commonRed,
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
+                  boxSIZED_15,
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.loginRegistColor,
+                      backgroundColor: loginRegistColor,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -241,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       "SignUp",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                       ),
                     ),
                   ),

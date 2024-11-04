@@ -21,11 +21,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
-        fillColor: AppColors.primaryGreen,
+        fillColor: primaryGreen,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

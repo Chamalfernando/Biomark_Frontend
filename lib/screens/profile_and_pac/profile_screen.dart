@@ -17,24 +17,26 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: AppColors.primaryGreen,
+        title: const Text(
+          'Profile',
+        ),
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              AppSizes.size10,
+              boxSIZED_10,
               Column(
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.logoutColor,
+                        backgroundColor: logoutColor,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40,
                           vertical: 15,
@@ -52,22 +54,24 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       child: const Text(
                         "Logout",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              AppSizes.size40,
+              boxSIZED_40,
               const Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage('assets/profileImg.png'),
+                  backgroundImage: AssetImage(
+                    'assets/profileImg.png',
+                  ),
                 ),
               ),
-              AppSizes.size20,
+              boxSIZED_20,
               Align(
                 alignment: Alignment.center,
                 child: Column(
@@ -80,7 +84,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                             "Hi There !!",
                             style: TextStyle(
                               fontSize: 25.0,
-                              color: AppColors.black,
+                              color: black,
                             ),
                           ),
                         ],
@@ -95,7 +99,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                               _fullName,
                               style: const TextStyle(
                                 fontSize: 25.0,
-                                color: AppColors.topicGreen,
+                                color: topicGreen,
                               ),
                               // overflow: TextOverflow.ellipsis,
                             ),
@@ -106,14 +110,14 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                   ],
                 ),
               ),
-              AppSizes.size20,
+              boxSIZED_20,
               const SizedBox(
                 child: Divider(
-                  color: Colors.black,
+                  color: black,
                   thickness: 2,
                 ),
               ),
-              AppSizes.size15,
+              boxSIZED_15,
               Column(
                 children: [
                   Row(
@@ -126,16 +130,15 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                                 text: "Full Name: ", // First part of the text
                                 style: TextStyle(
                                   fontSize: 20.0,
-                                  color: AppColors
-                                      .black, // Color for the first part
+                                  color: black, // Color for the first part
                                 ),
                               ),
                               TextSpan(
                                 text: _fullName,
                                 style: const TextStyle(
                                   fontSize: 20.0,
-                                  color: AppColors
-                                      .smsResendBlue, // Color for the second part
+                                  color:
+                                      smsResendBlue, // Color for the second part
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -145,14 +148,14 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       ),
                     ],
                   ),
-                  AppSizes.size10,
+                  boxSIZED_10,
                   Row(
                     children: [
                       const Text(
                         "Email : ",
                         style: TextStyle(
                           fontSize: 20.0,
-                          color: AppColors.black,
+                          color: black,
                         ),
                         // overflow: TextOverflow.ellipsis,
                       ),
@@ -161,14 +164,14 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                           _email,
                           style: const TextStyle(
                             fontSize: 20.0,
-                            color: AppColors.smsResendBlue,
+                            color: smsResendBlue,
                           ),
                           // overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
-                  AppSizes.size10,
+                  boxSIZED_10,
                   Row(
                     children: [
                       const Align(
@@ -177,7 +180,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                           "Date Of Birth : ",
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: AppColors.black,
+                            color: black,
                           ),
                         ),
                       ),
@@ -185,17 +188,17 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                         _dob,
                         style: const TextStyle(
                           fontSize: 20.0,
-                          color: AppColors.smsResendBlue,
+                          color: smsResendBlue,
                         ),
                       )
                     ],
                   ),
-                  AppSizes.size10,
+                  boxSIZED_10,
                   Align(
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.editColor,
+                        backgroundColor: editColor,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40,
                           vertical: 15,
@@ -213,33 +216,33 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       child: const Text(
                         "Edit",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: black,
                         ),
                       ),
                     ),
                   ),
-                  AppSizes.size10,
+                  boxSIZED_10,
                   const SizedBox(
                     child: Divider(
-                      color: Colors.black,
+                      color: black,
                       thickness: 2,
                     ),
                   ),
-                  AppSizes.size10,
+                  boxSIZED_10,
                   const Text(
                     "Personal Data",
                     style: TextStyle(
-                      color: AppColors.topicGreen,
+                      color: topicGreen,
                       fontSize: 25.0,
                     ),
                   ),
                   // if the personal data has been provided then the
-                  AppSizes.size10,
+                  boxSIZED_10,
                   const PersonalDataNotExist(),
-                  AppSizes.size15,
+                  boxSIZED_15,
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.editColor,
+                      backgroundColor: editColor,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
                         vertical: 15,
@@ -257,14 +260,14 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                     child: const Text(
                       "Create PAC",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: black,
                       ),
                     ),
                   ),
-                  AppSizes.size20,
+                  boxSIZED_20,
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.errorRed,
+                      backgroundColor: errorRed,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
                         vertical: 15,
@@ -282,7 +285,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                     child: const Text(
                       "Unsubscribe",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: whiteColor,
                       ),
                     ),
                   ),
@@ -304,7 +307,7 @@ class PersonalDataNotExist extends StatelessWidget {
     return const Text(
       "Personal data for model building  has not been provided !",
       style: TextStyle(
-        color: AppColors.topicGreen,
+        color: topicGreen,
         fontSize: 15.0,
       ),
     );

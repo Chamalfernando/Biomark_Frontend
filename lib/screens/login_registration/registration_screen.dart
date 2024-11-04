@@ -43,11 +43,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign up'),
-        backgroundColor: AppColors.primaryGreen,
+        title: const Text(
+          'Sign up',
+        ),
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -55,40 +57,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                  boxSIZED_20,
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
                       'assets/BioMark.png',
                     ),
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                  boxSIZED_40,
                   const CommonTopic(
                     topic: "Sign Up",
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  boxSIZED_20,
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Provide information for SignUp",
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: AppColors.black,
+                        color: black,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  boxSIZED_10,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "First Name",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -98,14 +94,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "Last Name",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -115,14 +109,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "Full Name",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -132,14 +124,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "Date Of Birth",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -149,14 +139,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "Email",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -166,14 +154,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   TextField(
                     controller: firstNameController,
                     decoration: InputDecoration(
                       labelText: "Password",
-                      fillColor: AppColors.primaryGreen,
+                      fillColor: primaryGreen,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -183,17 +169,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 2.5,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  boxSIZED_15,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.black,
+                          backgroundColor: black,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 15),
+                            horizontal: 40,
+                            vertical: 15,
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -207,7 +193,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         child: const Text(
                           "Next",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: whiteColor,
                           ),
                         ),
                       ),
@@ -220,6 +206,5 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
     );
-    ;
   }
 }

@@ -8,6 +8,7 @@ import 'package:biomark/screens/password_change/forgot_password_second_screen.da
 import 'package:biomark/screens/profile_and_pac/pac_creation_screen.dart';
 import 'package:biomark/screens/profile_and_pac/pac_screen.dart';
 import 'package:biomark/screens/profile_and_pac/profile_screen.dart';
+import 'package:biomark/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteHandler extends StatelessWidget {
@@ -23,6 +24,10 @@ class RouteHandler extends StatelessWidget {
         //   print("Arguments is not a list");
         // }
         switch (settings.name) {
+          case "/":
+            return MaterialPageRoute(
+              builder: (context) => const SplashScreen(),
+            );
           case "/login":
             return MaterialPageRoute(
               builder: (context) => LoginScreen(),
