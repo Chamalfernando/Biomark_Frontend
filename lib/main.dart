@@ -1,4 +1,4 @@
-import 'package:biomark/screens/routes.dart';
+import 'package:biomark/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
