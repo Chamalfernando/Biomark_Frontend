@@ -57,7 +57,7 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   ),
                   style: const TextStyle(
                     height: 2.5,
-                    color: AppColors.errorRed,
+                    color: errorRed,
                   ),
                   enabled: false,
                 ),
@@ -77,7 +77,7 @@ class _LoginFailScreenState extends State<LoginFailScreen> {
                   ),
                   style: const TextStyle(
                     height: 2.5,
-                    color: AppColors.errorRed,
+                    color: errorRed,
                   ),
                   enabled: false,
                   obscureText: true,

@@ -1,4 +1,6 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/validator_functions.dart';
+import 'package:biomark/widgets/TextFormField.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 // import '../../services/database_helper.dart';
@@ -11,8 +13,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // controllers for handle email and password.
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _loginFormGlobalKey = GlobalKey<FormState>();
 
   bool _obscurePassword = true; // Track the visibility state of the password
 
@@ -53,7 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
-                        'assets/BioMark.png'), // Assuming you have the image in assets folder
+                      'assets/BioMark.png',
+                    ),
                   ),
                   // Space between image and fields
                   boxSIZED_40,
@@ -62,82 +67,98 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   // Space between image and fields
                   boxSIZED_40,
-                  // Email TextField
-                  TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                  ),
-                  // Space between Email and Password fields
-                  boxSIZED_20,
-                  // Password TextField
-                  TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      fillColor: primaryGreen,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      // Add the eye icon in the suffixIcon
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Change the icon based on the password visibility state
-                          _obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                  Form(
+                    key: _loginFormGlobalKey,
+                    child: Column(
+                      children: [
+                        // Email TextFormField
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          validator: validateEmail,
+                          onSaved: (value) {},
                         ),
-                        onPressed: () {
-                          // Toggle the password visibility state
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                      ),
+                        // Space between Email and Password fields
+                        boxSIZED_20,
+                        // Password TextField
+                        TextFormField(
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            fillColor: primaryGreen,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            // Add the eye icon in the suffixIcon
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Change the icon based on the password visibility state
+                                _obscurePassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                // Toggle the password visibility state
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                          ),
+                          style: const TextStyle(
+                            height: 2.5,
+                          ),
+                          obscureText: !_obscurePassword,
+                          showCursor: true,
+                          validator: validatePassword,
+                        ),
+                        boxSIZED_20,
+                        // Login Button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: loginRegistColor,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 40,
+                              vertical: 15,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_loginFormGlobalKey.currentState!.validate()) {
+                              _loginFormGlobalKey.currentState!.save();
+                              Navigator.pushNamed(
+                                context,
+                                "/normalprofilescreen",
+                              );
+                              setState(() {
+                                // logic to handle login with databases.
+                              });
+                            }
+                          },
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              color: whiteColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    style: const TextStyle(
-                      height: 2.5,
-                    ),
-                    obscureText:
-                        _obscurePassword, // control password visibility
-                    showCursor: true,
                   ),
-                  boxSIZED_20,
-                  // Login Button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: loginRegistColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        "/normalprofilescreen",
-                      );
-                    },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        color: whiteColor,
-                      ),
-                    ),
-                  ),
+
                   boxSIZED_25,
                   Align(
                     alignment: Alignment.centerLeft,

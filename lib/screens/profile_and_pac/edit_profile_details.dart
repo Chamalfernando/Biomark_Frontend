@@ -18,7 +18,7 @@ class _EditNormalProfileDetailsState extends State<EditNormalProfileDetails> {
         title: const Text(
           'Edit Profile Details',
         ),
-        backgroundColor: AppColors.primaryGreen,
+        backgroundColor: primaryGreen,
         centerTitle: true,
       ),
       body: const CommonTopic(
