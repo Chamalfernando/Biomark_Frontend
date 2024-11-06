@@ -1,3 +1,5 @@
+import 'package:bcrypt/bcrypt.dart'; // for bcrypt
+
 String? validateEmail(String? value) {
   // Basic null/empty check
   if (value == null || value.isEmpty) {
@@ -103,4 +105,15 @@ String? validateDOB(String? value) {
   }
 
   return null; // Return null if valid
+}
+
+// Hash the password using bcrypt
+String hashPassword(String password) {
+  String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+  return hashedPassword;
+}
+
+// Verify the password when a user logs in
+bool verifyPassword(String password, String hashedPassword) {
+  return BCrypt.checkpw(password, hashedPassword);
 }
