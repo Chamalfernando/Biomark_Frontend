@@ -4,9 +4,6 @@ import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For date formatting
 
-// import '../../models/user.dart';
-// import '../../services/database_helper.dart';
-
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
 
@@ -45,26 +42,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       );
     }
   }
-
-  // void _register() async {
-  //   String name = nameController.text;
-  //   String email = emailController.text;
-  //   String password = passwordController.text;
-
-  //   var dbHelper = DatabaseHelper.instance;
-  //   var newUser = User(
-  //     fullName: name,
-  //     dob: "1990-01-01", // Example data
-  //     email: email,
-  //     password: password,
-  //     mothersMaidenName: "Test",
-  //     childhoodFriend: "Friend",
-  //     petName: "Pet",
-  //     customQuestion: "Question",
-  //   );
-
-  //   await dbHelper.insertUser(newUser);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +273,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     context,
                                     "/securityquestscreen",
                                     arguments: {
-                                      // 'formKey': _registrationFormGlobalKey,
                                       'firstName': firstNameController.text,
                                       'lastName': lastNameController.text,
                                       'fullName': fullNameController.text,
