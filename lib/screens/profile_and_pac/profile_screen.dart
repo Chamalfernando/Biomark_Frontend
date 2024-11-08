@@ -14,6 +14,7 @@ class NormalProfileScreen extends StatefulWidget {
 }
 
 class _NormalProfileScreenState extends State<NormalProfileScreen> {
+  // these will be gained by the backend logic.
   String _fullName = "John Doe Johone lsajflsjoflknsv sidfluew";
   String _email = "johnDoe@hotmail.com";
   String _dob = "20/09/1970";

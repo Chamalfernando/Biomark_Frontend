@@ -24,7 +24,9 @@ Future<void> fetchPacData() async {
 
     if (response.statusCode == 200) {
       // Handle the retrieved PAC data
-      final pacData = jsonDecode(response.body);
+
+      // final pacData = jsonDecode(response.body);
+
       // Do something with pacData
     } else {
       // Handle error
@@ -69,7 +71,10 @@ void checkUserVolunteer() async {
 class PacService {
   static const String baseUrl = 'http://localhost:3000'; // Your backend URL
 
-  Future<Pac?> getPacById(String id) async {
+  Future<Pac?> getPacById() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? id = prefs.getString("userUniqueId");
+
     final url = '$baseUrl/pac/$id'; // The endpoint you defined in the backend
 
     try {

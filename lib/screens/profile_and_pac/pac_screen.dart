@@ -5,10 +5,10 @@ import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
 
 class PACScreen extends StatefulWidget {
-  final String userId; // Add userId parameter to get specific PAC data
+  // final String userId; // Add userId parameter to get specific PAC data
   const PACScreen({
     super.key,
-    required this.userId,
+    // required this.userId,
   });
 
   @override
@@ -22,7 +22,7 @@ class _PACScreenState extends State<PACScreen> {
   void initState() {
     super.initState();
     // Fetch PAC data by user ID when the screen loads
-    pacData = PacService().getPacById(widget.userId);
+    pacData = PacService().getPacById();
   }
 
   @override

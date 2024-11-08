@@ -1,4 +1,3 @@
-import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/material.dart'; // for bcrypt
 
 String? validateEmail(String? value) {

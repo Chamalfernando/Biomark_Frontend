@@ -1,4 +1,3 @@
-import 'package:biomark/models/user.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
