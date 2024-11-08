@@ -242,7 +242,13 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       fontSize: 25.0,
                     ),
                   ),
-                  // if the personal data has been provided then the
+
+                  /* if the personal data has been provided then the 
+                    using ('userUniqueId') we can create a logic to visualize those data for this screen.
+
+                    getUserUniqueId() will return the string related to that.
+                  */
+
                   boxSIZED_10,
                   const PersonalDataNotExist(),
                   boxSIZED_15,

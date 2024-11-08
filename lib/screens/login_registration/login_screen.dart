@@ -1,4 +1,5 @@
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/backend_service.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,7 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
       // Get email and password from controllers
       String email = emailController.text.trim();
       String passWord = passwordController.text.trim();
-
+      checkUserRole();
+      checkUserVolunteer();
       setState(() {
         _isLoading = true;
       });

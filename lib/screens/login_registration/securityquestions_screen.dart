@@ -5,6 +5,7 @@ import 'package:biomark/widgets/Topic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class SecurityQuestionsScreen extends StatefulWidget {
   final String firstName;
@@ -38,13 +39,16 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
   final TextEditingController customAnsController = TextEditingController();
   final _securityQuestionsFormGlobalKey = GlobalKey<FormState>();
 
-  // Function to submit form data to FireStore
+  // Function to submit form data to FireStore and save user role in SharedPreferences
   Future<void> _submitDataToDB() async {
     if (_securityQuestionsFormGlobalKey.currentState!.validate()) {
       _securityQuestionsFormGlobalKey.currentState!.save();
 
       String email = widget.email;
       String passWord = widget.passWord;
+      final String userRole =
+          "GENERALUSER"; // The role you want to assign to the user
+      bool _isVolunteer = false;
 
       try {
         // Create user in Firebase Authentication
@@ -67,7 +71,14 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
           'petName': childPetNameController.text,
           'customQuestion': customQuestController.text,
           'customAnswer': customAnsController.text,
+          'role': userRole, // Save the user as a general user.
+          // 'volunteer': _isVolunteer,
         });
+
+        // Save user role in SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('ROLE_1', userRole);
+        await prefs.setBool("ROLE_2", _isVolunteer);
 
         // After successful insertion, show a confirmation message
         // ignore: use_build_context_synchronously

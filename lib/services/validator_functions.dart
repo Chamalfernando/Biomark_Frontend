@@ -136,15 +136,3 @@ String? validateLocation(String location) {
   }
   return null; // Return null if valid
 }
-
-String? validateHeight(double height) {
-  double minHeight = 0.55; // Shortest man height in meters
-  double maxHeight = 2.52; // Tallest man height in meters
-
-  if (height < minHeight) {
-    return 'Height is too short to be realistic';
-  } else if (height > maxHeight) {
-    return 'Height is too tall to be realistic';
-  }
-  return null; // Return null if valid
-}
