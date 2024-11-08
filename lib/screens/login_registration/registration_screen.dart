@@ -173,7 +173,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               icon: const Icon(Icons.calendar_today),
                               onPressed: () {
                                 _selectDate(
-                                    context); // Open the date picker when the icon is tapped
+                                  context,
+                                ); // Open the date picker when the icon is tapped
                               },
                             ),
                           ),

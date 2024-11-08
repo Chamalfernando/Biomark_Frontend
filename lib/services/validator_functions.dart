@@ -1,4 +1,5 @@
-import 'package:bcrypt/bcrypt.dart'; // for bcrypt
+import 'package:bcrypt/bcrypt.dart';
+import 'package:flutter/material.dart'; // for bcrypt
 
 String? validateEmail(String? value) {
   // Basic null/empty check
@@ -107,13 +108,43 @@ String? validateDOB(String? value) {
   return null; // Return null if valid
 }
 
-// Hash the password using bcrypt
-String hashPassword(String password) {
-  String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-  return hashedPassword;
+// // Hash the password using bcrypt
+// String hashPassword(String password) {
+//   String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+//   return hashedPassword;
+// }
+
+// // Verify the password when a user logs in
+// bool verifyPassword(String password, String hashedPassword) {
+//   return BCrypt.checkpw(password, hashedPassword);
+// }
+
+String? validateTimeOfBirth(TimeOfDay selectedTime) {
+  final now = TimeOfDay.now();
+  if (selectedTime.hour > now.hour ||
+      (selectedTime.hour == now.hour && selectedTime.minute > now.minute)) {
+    return 'Time of birth cannot be in the future.';
+  }
+  return null; // Return null if valid
 }
 
-// Verify the password when a user logs in
-bool verifyPassword(String password, String hashedPassword) {
-  return BCrypt.checkpw(password, hashedPassword);
+String? validateLocation(String location) {
+  if (location.isEmpty) {
+    return 'Location cannot be empty';
+  } else if (location.length < 2) {
+    return 'Location name is too short';
+  }
+  return null; // Return null if valid
+}
+
+String? validateHeight(double height) {
+  double minHeight = 0.55; // Shortest man height in meters
+  double maxHeight = 2.52; // Tallest man height in meters
+
+  if (height < minHeight) {
+    return 'Height is too short to be realistic';
+  } else if (height > maxHeight) {
+    return 'Height is too tall to be realistic';
+  }
+  return null; // Return null if valid
 }

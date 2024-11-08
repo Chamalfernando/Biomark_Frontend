@@ -6,9 +6,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({
+    super.key,
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -50,16 +53,18 @@ class _LoginScreenState extends State<LoginScreen> {
               userDoc.data() as Map<String, dynamic>;
 
           // You can now access additional fields like fullName, dob, etc.
-          String fullName = userData['fullName'];
+          var fullName = userData['fullName'];
 
           // Successful login
           _loginFormGlobalKey.currentState!.reset();
           // Navigate to the user's profile screen or another page
-          Navigator.pushReplacementNamed(
+          Navigator.pushNamed(
             // ignore: use_build_context_synchronously
             context,
             "/normalprofilescreen",
-            arguments: fullName,
+            arguments: {
+              "userFullName": fullName,
+            },
           );
         } else {
           // Handle the case where user data is missing in Firestore
@@ -75,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } on FirebaseAuthException catch (e) {
         // Handle different errors from Firebase
         if (e.code == 'user-not-found') {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text(
