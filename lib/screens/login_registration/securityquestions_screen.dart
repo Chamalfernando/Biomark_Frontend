@@ -1,9 +1,10 @@
-import 'package:biomark/models/user.dart';
 import 'package:biomark/resources/theme.dart';
-import 'package:biomark/services/hive_database_helper.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class SecurityQuestionsScreen extends StatefulWidget {
   final String firstName;
@@ -37,40 +38,74 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
   final TextEditingController customAnsController = TextEditingController();
   final _securityQuestionsFormGlobalKey = GlobalKey<FormState>();
 
-  // Function to submit form data to SQLite
+  // Function to submit form data to FireStore and save user role in SharedPreferences
   Future<void> _submitDataToDB() async {
     if (_securityQuestionsFormGlobalKey.currentState!.validate()) {
       _securityQuestionsFormGlobalKey.currentState!.save();
 
-      // Create a new user object
-      User newUser = User(
-        firstName: widget.firstName,
-        lastName: widget.lastName,
-        fullName: widget.fullName,
-        dob: widget.dob,
-        email: widget.email,
-        password: widget.passWord,
-        maidenName: mMaidenNameController.text,
-        bestFriendName: childrBestFriendNameController.text,
-        petName: childPetNameController.text,
-        customQuestion: customQuestController.text,
-        customAnswer: customAnsController.text,
-      );
+      String email = widget.email;
+      String passWord = widget.passWord;
+      final String userRole =
+          "GENERALUSER"; // The role you want to assign to the user
+      bool _isVolunteer = false;
 
-      // Save user data
-      await saveUser(newUser, context);
+      try {
+        // Create user in Firebase Authentication
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: passWord);
 
-      // After successful insertion, show a confirmation message or navigate to another screen
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'User data successfully saved!',
+        // After successfully creating the Firebase Authentication user,
+        // store additional user information in Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'firstName': widget.firstName,
+          'lastName': widget.lastName,
+          'fullName': widget.fullName,
+          'dob': widget.dob,
+          'email': email,
+          'maidenName': mMaidenNameController.text,
+          'bestFriendName': childrBestFriendNameController.text,
+          'petName': childPetNameController.text,
+          'customQuestion': customQuestController.text,
+          'customAnswer': customAnsController.text,
+          'role': userRole, // Save the user as a general user.
+          // 'volunteer': _isVolunteer,
+        });
+
+        // Save user role in SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('ROLE_1', userRole);
+        await prefs.setBool("ROLE_2", _isVolunteer);
+
+        // After successful insertion, show a confirmation message
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'User data successfully saved!',
+            ),
           ),
-        ),
-      );
+        );
 
-      // Optionally navigate to another screen or clear the form
+        // Optionally navigate to another screen
+        Navigator.pushReplacementNamed(
+          // ignore: use_build_context_synchronously
+          context,
+          "/login",
+        );
+      } on FirebaseAuthException catch (e) {
+        // Handle errors (e.g., email already in use, invalid password)
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Failed to save user data: $e',
+            ),
+          ),
+        );
+      }
     }
   }
 

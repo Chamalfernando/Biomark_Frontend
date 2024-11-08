@@ -2,16 +2,22 @@ import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
 class NormalProfileScreen extends StatefulWidget {
-  const NormalProfileScreen({super.key});
+  final String userFullName;
+
+  const NormalProfileScreen({
+    super.key,
+    required this.userFullName,
+  });
 
   @override
   State<NormalProfileScreen> createState() => _NormalProfileScreenState();
 }
 
 class _NormalProfileScreenState extends State<NormalProfileScreen> {
-  final String _fullName = "John Doe John Doe John Doe John Doe";
-  final String _email = "johnDoe@hotmail.com";
-  final String _dob = "20/09/1970";
+  // these will be gained by the backend logic.
+  String _fullName = "John Doe Johone lsajflsjoflknsv sidfluew";
+  String _email = "johnDoe@hotmail.com";
+  String _dob = "20/09/1970";
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +87,8 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       child: Row(
                         children: [
                           Text(
-                            "Hi There !!",
+                            // 'Hi There $_fullName',
+                            'Hi There Chamal Jong doe',
                             style: TextStyle(
                               fontSize: 25.0,
                               color: black,
@@ -236,7 +243,13 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       fontSize: 25.0,
                     ),
                   ),
-                  // if the personal data has been provided then the
+
+                  /* if the personal data has been provided then the 
+                    using ('userUniqueId') we can create a logic to visualize those data for this screen.
+
+                    getUserUniqueId() will return the string related to that.
+                  */
+
                   boxSIZED_10,
                   const PersonalDataNotExist(),
                   boxSIZED_15,

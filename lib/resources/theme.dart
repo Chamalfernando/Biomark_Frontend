@@ -28,3 +28,7 @@ const SizedBox boxSIZED_25 = SizedBox(
 const SizedBox boxSIZED_40 = SizedBox(
   height: 40,
 );
+
+const SizedBox boxSIZEDW_15 = SizedBox(
+  width: 15,
+);

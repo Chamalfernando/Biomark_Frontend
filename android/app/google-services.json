@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "769412542471",
     "project_id": "biomarkapp-da4b3",
-    "storage_bucket": "biomarkapp-da4b3.appspot.com"
+    "storage_bucket": "biomarkapp-da4b3.firebasestorage.app"
   },
   "client": [
     {
