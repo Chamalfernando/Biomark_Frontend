@@ -1,3 +1,4 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,12 @@ class ForgotPasswordSecondScreen extends StatefulWidget {
 
 class _ForgotPasswordSecondScreenState
     extends State<ForgotPasswordSecondScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the forgot password second screen");
+  }
+
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController reTypePasswordController =
       TextEditingController();

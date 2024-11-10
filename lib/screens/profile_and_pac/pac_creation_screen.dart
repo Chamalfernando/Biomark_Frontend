@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:biomark/resources/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,17 @@ class PACCreatingScreen extends StatefulWidget {
 }
 
 class _PACCreatingScreenState extends State<PACCreatingScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // final prefs = SharedPreferences.getInstance();
+  //   customLogger.i("navigate to the PAC creation screen");
+  //   customLogger.i(prefs.getString("userUniqueId"));
+  //   customLogger.i(prefs.getString("ROLE_1"));
+  //   customLogger.i(prefs.getBool("ROLE_2"));
+
   final TextEditingController dateOfBirthController = TextEditingController();
   final TextEditingController timeOfBirthController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -126,13 +138,24 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
         final responseData = jsonDecode(response.body);
         final uniqueId = responseData['uniqueId'];
 
-        // Save the uniqueId in SharedPreferences
+        // Save the uniqueId in SharedPreferences & logic to change the role as volunteer
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('userUniqueId', uniqueId);
-
-        // Save the role as VOLUNTEER and set ROLE_2 to true
-        await prefs.setBool(
-            'ROLE_2', true); // Set ROLE_2 to true in SharedPreferences
+        if (prefs.getString("userUniqueId") == "NULL") {
+          await prefs.setString("userUniqueId", uniqueId);
+          // Save the role as VOLUNTEER and set ROLE_2 to true
+          await prefs.setBool(
+              'ROLE_2', true); // Set ROLE_2 to true in SharedPreferences
+          await prefs.setString("ROLE_1", "VOLUNTEER");
+          customLogger.i(prefs.getString("userUniqueId"));
+          // print(prefs.getString("userUniqueId"));
+          customLogger.i(prefs.getString("ROLE_1"));
+          // print(prefs.getString("ROLE_1"));
+          customLogger.i(prefs.getBool("ROLE_2"));
+          // print(prefs.getString("ROLE_2"));
+        } else {
+          customLogger.i("Already set up the user unique ID");
+          // print("Already set up the user unique ID");
+        }
 
         // Handle success
         // ignore: use_build_context_synchronously
@@ -548,12 +571,13 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // if (_pacCreationFormGlobalKey.currentState!.validate()) {
-                        //   Navigator.pushNamed(
-                        //     context,
-                        //     "/pacscreen",
-                        //   );
-                        // }
+                        if (_pacCreationFormGlobalKey.currentState!
+                            .validate()) {
+                          Navigator.pushNamed(
+                            context,
+                            "/pacscreen",
+                          );
+                        }
                         submitData();
                       },
                       child: const Text(

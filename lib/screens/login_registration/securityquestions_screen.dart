@@ -1,4 +1,6 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/encyption_service.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +32,12 @@ class SecurityQuestionsScreen extends StatefulWidget {
 }
 
 class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the Security Questions screen");
+  }
+
   final TextEditingController mMaidenNameController = TextEditingController();
   final TextEditingController childrBestFriendNameController =
       TextEditingController();
@@ -47,12 +55,28 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
       String passWord = widget.passWord;
       final String userRole =
           "GENERALUSER"; // The role you want to assign to the user
-      bool _isVolunteer = false;
+      bool isVolunteer = false;
 
       try {
         // Create user in Firebase Authentication
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: passWord);
+
+        // Encrypt sensitive data
+        String encFullName = EncryptionService.encrypt(widget.fullName);
+        String encDateOfBirth = EncryptionService.encrypt(widget.dob);
+        String encMaidenName =
+            EncryptionService.encrypt(mMaidenNameController.text);
+        String encBestFriendName =
+            EncryptionService.encrypt(childrBestFriendNameController.text);
+        String encPetName =
+            EncryptionService.encrypt(childPetNameController.text);
+        String encCustomQuestion =
+            EncryptionService.encrypt(customQuestController.text);
+        String encCustomAnswer =
+            EncryptionService.encrypt(customAnsController.text);
+        String encEmail = EncryptionService.encrypt(email);
+        String encPassWord = EncryptionService.encrypt(passWord);
 
         // After successfully creating the Firebase Authentication user,
         // store additional user information in Firestore
@@ -65,19 +89,25 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
           'fullName': widget.fullName,
           'dob': widget.dob,
           'email': email,
+          'passWord': encPassWord,
           'maidenName': mMaidenNameController.text,
           'bestFriendName': childrBestFriendNameController.text,
           'petName': childPetNameController.text,
           'customQuestion': customQuestController.text,
           'customAnswer': customAnsController.text,
           'role': userRole, // Save the user as a general user.
-          // 'volunteer': _isVolunteer,
+          'volunteer': isVolunteer,
         });
 
         // Save user role in SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('ROLE_1', userRole);
-        await prefs.setBool("ROLE_2", _isVolunteer);
+        await prefs.setBool("ROLE_2", isVolunteer);
+        await prefs.setString("userUniqueId", "NULL");
+
+        customLogger.i(prefs.getString("ROLE_1"));
+        customLogger.i(prefs.getBool("ROLE_2"));
+        customLogger.i(prefs.getString("userUniqueId"));
 
         // After successful insertion, show a confirmation message
         // ignore: use_build_context_synchronously

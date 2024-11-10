@@ -1,3 +1,4 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,12 @@ class AccountRecoveryScreen extends StatefulWidget {
 }
 
 class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the account recovery screen");
+  }
+
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController friendNameController = TextEditingController();

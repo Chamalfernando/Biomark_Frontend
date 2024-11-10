@@ -1,4 +1,5 @@
 import 'package:biomark/models/pac.dart';
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:biomark/services/backend_service.dart';
 import 'package:biomark/widgets/Topic.dart';
@@ -23,6 +24,7 @@ class _PACScreenState extends State<PACScreen> {
     super.initState();
     // Fetch PAC data by user ID when the screen loads
     pacData = PacService().getPacById();
+    customLogger.i("navigate to the login screen");
   }
 
   @override

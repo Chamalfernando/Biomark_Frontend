@@ -1,4 +1,6 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/encyption_service.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,12 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the registration screen");
+  }
+
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
@@ -282,9 +290,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       'pw': passwordController.text,
                                     },
                                   );
-                                  // setState(() {
-                                  //   // logic to handle login with databases.
-                                  // });
                                 }
                               },
                               child: const Text(

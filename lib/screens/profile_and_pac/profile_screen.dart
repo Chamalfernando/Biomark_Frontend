@@ -1,5 +1,9 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/encyption_service.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NormalProfileScreen extends StatefulWidget {
   final String userFullName;
@@ -14,10 +18,141 @@ class NormalProfileScreen extends StatefulWidget {
 }
 
 class _NormalProfileScreenState extends State<NormalProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+    customLogger.i("navigate to the profile screen");
+  }
+
+  User? _currentUser;
+  bool _isLoading = true;
+
   // these will be gained by the backend logic.
-  String _fullName = "John Doe Johone lsajflsjoflknsv sidfluew";
-  String _email = "johnDoe@hotmail.com";
-  String _dob = "20/09/1970";
+  String _fullName = "";
+  String _email = "";
+  String _dob = "";
+  String _userRole = "";
+  String _passWord = "";
+  // String _decryptedPassWord = "";
+
+  // Method to fetch authenticated user's data from Firestore
+  Future<void> _fetchUserData() async {
+    try {
+      // Get the currently authenticated user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        setState(() {
+          _currentUser = user;
+        });
+
+        // Get the user's document from Firestore using their UID
+        DocumentSnapshot<Map<String, dynamic>> userData =
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user.uid)
+                .get();
+
+        if (userData.exists) {
+          // If user data is found, store it
+          setState(() {
+            _fullName = userData.data()?['fullName'] ?? 'No Name';
+            _email = userData.data()?['email'] ?? 'No Email';
+            _dob = userData.data()?['dob'] ?? 'No Date of Birth';
+            _passWord = userData.data()?['passWord'] ?? 'No passWord provided';
+            _userRole = userData.data()?['role'] ?? 'No user Role provided';
+            _isLoading = false;
+            // _passWord = EncryptionService.decrypt(_passWord);
+            customLogger.i("userData fetched");
+          });
+        } else {
+          // Handle the case where user data is missing
+          setState(() {
+            _isLoading = false;
+            customLogger.e("user Data not found");
+          });
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('User data not found.'),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      // Handle any errors
+      customLogger.e("Error occured when fetching the data");
+      setState(() {
+        _isLoading = false;
+        _fullName = "Error fetching data";
+        _email = "Error";
+        _dob = "Error";
+        _passWord = "Error";
+      });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred: $e'),
+        ),
+      );
+    }
+  }
+
+  // Update user data in Firestore
+  Future<void> _updateUserData(
+      String firstName, String lastName, String email) async {
+    try {
+      if (_currentUser != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_currentUser!.uid)
+            .update({
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User data successfully updated!')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update user data: $e')),
+      );
+    }
+  }
+
+  // Log out the user
+  Future<void> _logoutUser() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Successfully logged out!',
+          ),
+        ),
+      );
+      Navigator.pop(
+        // ignore: use_build_context_synchronously
+        context,
+      );
+      customLogger.i("successfully logged out!");
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Failed to log out: $e',
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +175,24 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
+                    // logout mechanism to be implemented.
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: logoutColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 15,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                        padding: const EdgeInsets.all(15),
+                        shape:
+                            const CircleBorder(), // Makes the button circular
                       ),
                       onPressed: () {
+                        _logoutUser();
                         // Navigator.pushNamed(
                         //   context,
-                        //   "/registrationscreen",
+                        //   "/login",
                         // );
                       },
-                      child: const Text(
-                        "Logout",
-                        style: TextStyle(
-                          color: whiteColor,
-                        ),
+                      child: const Icon(
+                        Icons.logout, // Logout icon
+                        color: whiteColor,
                       ),
                     ),
                   ),
@@ -87,8 +218,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       child: Row(
                         children: [
                           Text(
-                            // 'Hi There $_fullName',
-                            'Hi There Chamal Jong doe',
+                            'Hi There',
                             style: TextStyle(
                               fontSize: 25.0,
                               color: black,
@@ -134,10 +264,10 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                           TextSpan(
                             children: [
                               const TextSpan(
-                                text: "Full Name: ", // First part of the text
+                                text: "Full Name: ",
                                 style: TextStyle(
                                   fontSize: 20.0,
-                                  color: black, // Color for the first part
+                                  color: black,
                                 ),
                               ),
                               TextSpan(
@@ -198,6 +328,78 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                           color: smsResendBlue,
                         ),
                       )
+                    ],
+                  ),
+                  boxSIZED_10,
+                  Row(
+                    children: [
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "User Role : ",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: black,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        _userRole,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: smsResendBlue,
+                        ),
+                      )
+                    ],
+                  ),
+                  boxSIZED_10,
+                  // Row(
+                  //   children: [
+                  //     const Align(
+                  //       alignment: Alignment.centerLeft,
+                  //       child: Text(
+                  //         "PassWord : ",
+                  //         style: TextStyle(
+                  //           fontSize: 20.0,
+                  //           color: black,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       _passWord,
+                  //       style: const TextStyle(
+                  //         fontSize: 20.0,
+                  //         color: smsResendBlue,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(
+                                text: "PassWord : ", // First part of the text
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: black, // Color for the first part
+                                ),
+                              ),
+                              TextSpan(
+                                text: _passWord,
+                                style: const TextStyle(
+                                  fontSize: 20.0,
+                                  color:
+                                      smsResendBlue, // Color for the second part
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   boxSIZED_10,

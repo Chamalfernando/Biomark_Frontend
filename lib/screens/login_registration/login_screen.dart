@@ -1,3 +1,4 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:biomark/services/backend_service.dart';
 import 'package:biomark/services/validator_functions.dart';
@@ -5,6 +6,7 @@ import 'package:biomark/widgets/Topic.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -17,6 +19,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the login screen");
+  }
+
   // controllers for handle email and password.
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -35,6 +43,12 @@ class _LoginScreenState extends State<LoginScreen> {
       String passWord = passwordController.text.trim();
       checkUserRole();
       checkUserVolunteer();
+      final preferences = await SharedPreferences.getInstance();
+      if (preferences.getString("userUniqueId") != "NULL") {
+        customLogger.i(preferences.getString("userUniqueId"));
+      }
+      customLogger.i(preferences.getString("ROLE_1"));
+      customLogger.i(preferences.getBool("ROLE_2"));
       setState(() {
         _isLoading = true;
       });

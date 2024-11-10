@@ -1,3 +1,4 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,12 @@ class ForgotPassWordInitScreen extends StatefulWidget {
 }
 
 class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the Forgot Password initial screen");
+  }
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController smsController = TextEditingController();
 

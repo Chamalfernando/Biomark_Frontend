@@ -1,3 +1,4 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,12 @@ class LoginFailScreen extends StatefulWidget {
 }
 
 class _LoginFailScreenState extends State<LoginFailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the login failed screen");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

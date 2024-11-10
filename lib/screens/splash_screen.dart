@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    customLogger.i("Splash Screen Opened!");
     Timer(
       const Duration(
         seconds: 3,
