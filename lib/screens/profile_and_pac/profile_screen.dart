@@ -167,7 +167,6 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
       //   context,
       // );
       Navigator.pushReplacementNamed(
-        // ignore: use_build_context_synchronously
         context,
         "/login",
       );
@@ -196,39 +195,44 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
         automaticallyImplyLeading: false,
       ),
       backgroundColor: whiteColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: _logoutUser,
+        backgroundColor: logoutColor,
+        child: const Icon(Icons.logout, color: whiteColor),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              boxSIZED_10,
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    // logout mechanism to be implemented.
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: logoutColor,
-                        padding: const EdgeInsets.all(15),
-                        shape:
-                            const CircleBorder(), // Makes the button circular
-                      ),
-                      onPressed: () {
-                        _logoutUser();
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   "/login",
-                        // );
-                      },
-                      child: const Icon(
-                        Icons.logout, // Logout icon
-                        color: whiteColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // boxSIZED_10,
+              // Column(
+              //   children: [
+              //     Align(
+              //       alignment: Alignment.centerRight,
+              //       // logout mechanism to be implemented.
+              //       child: ElevatedButton(
+              //         style: ElevatedButton.styleFrom(
+              //           backgroundColor: logoutColor,
+              //           padding: const EdgeInsets.all(15),
+              //           shape:
+              //               const CircleBorder(), // Makes the button circular
+              //         ),
+              //         onPressed: () {
+              //           _logoutUser();
+              //           // Navigator.pushNamed(
+              //           //   context,
+              //           //   "/login",
+              //           // );
+              //         },
+              //         child: const Icon(
+              //           Icons.logout, // Logout icon
+              //           color: whiteColor,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               boxSIZED_40,
               const Align(
                 alignment: Alignment.center,
@@ -587,5 +591,33 @@ class _PersonalDataExistState extends State<PersonalDataExist> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
+  }
+}
+
+Widget _buildUserInfoRow(String title, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      children: [
+        Text(
+          "$title: ",
+          style: const TextStyle(fontSize: 20.0, color: black),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 20.0, color: smsResendBlue),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _displayPersonalData(String userRole) {
+  if (userRole == "VOLUNTEER") {
+    return const PersonalDataExist();
+  } else {
+    return const PersonalDataNotExist();
   }
 }

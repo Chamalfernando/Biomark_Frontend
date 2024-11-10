@@ -52,31 +52,31 @@ String? validatePassword(String? value) {
   return null; // If password meets all criteria
 }
 
-String? validateFirstName(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your first name';
-  }
+// String? validateFirstName(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your first name';
+//   }
 
-  // Check if the first name contains any spaces
-  if (value.contains(' ')) {
-    return 'First name should not contain spaces';
-  }
+//   // Check if the first name contains any spaces
+//   if (value.contains(' ')) {
+//     return 'First name should not contain spaces';
+//   }
 
-  return null; // Return null if valid
-}
+//   return null; // Return null if valid
+// }
 
-String? validateLastName(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your last name';
-  }
+// String? validateLastName(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your last name';
+//   }
 
-  // Check if the last name contains any spaces
-  if (value.contains(' ')) {
-    return 'Last name should not contain spaces';
-  }
+//   // Check if the last name contains any spaces
+//   if (value.contains(' ')) {
+//     return 'Last name should not contain spaces';
+//   }
 
-  return null; // Return null if valid
-}
+//   return null; // Return null if valid
+// }
 
 // String? validateFullName(String? value, String firstName, String lastName) {
 //   if (value == null || value.isEmpty) {
@@ -140,37 +140,6 @@ String? validateTimeOfBirth(String? value) {
   }
   return null; // Return null if valid
 }
-
-// Function to validate TimeOfBirth with selectedTime as TimeOfDay
-// String? validateTimeOfBirth(String? value) {
-//   if (value == null || value.isEmpty) {
-//     return 'Please select the time of birth.';
-//   }
-
-//   // Parse the value from string to TimeOfDay (assuming the format is like '2:49 PM')
-//   final parsedTime = _parseTime(value);
-//   if (parsedTime == null) {
-//     return 'Invalid time format.';
-//   }
-
-//   final now = TimeOfDay.now();
-//   if (parsedTime.hour > now.hour ||
-//       (parsedTime.hour == now.hour && parsedTime.minute > now.minute)) {
-//     return 'Time of birth cannot be in the future.';
-//   }
-//   return null; // Return null if valid
-// }
-
-// Function to parse String to TimeOfDay (use 24-hour format if needed)
-// TimeOfDay? _parseTime(String value) {
-//   try {
-//     final format = DateFormat.jm(); // e.g., 2:49 PM
-//     final dateTime = format.parse(value);
-//     return TimeOfDay.fromDateTime(dateTime);
-//   } catch (e) {
-//     return null;
-//   }
-// }
 
 String? validateLocation(String location) {
   if (location.isEmpty) {

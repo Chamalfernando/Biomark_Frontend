@@ -35,6 +35,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               boxSIZED_20,
               const CircleAvatar(
@@ -47,117 +48,60 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
               ),
               boxSIZED_20,
               const Text(
-                "Answer to following security questions",
+                "Please answer the following security questions to recover your account.",
                 style: TextStyle(
-                  fontSize: 20.0,
-                  color: errorRed,
+                  fontSize: 18.0,
+                  color: Colors.black54,
                 ),
               ),
               boxSIZED_20,
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "1. Full Name Given Previously",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: black,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "1. Full Name Given Earlier",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: black,
+                    ),
                   ),
-                ),
-              ),
-              boxSIZED_10,
-              TextField(
-                controller: fullNameController,
-                decoration: InputDecoration(
-                  labelText: "Full Name",
-                  fillColor: primaryGreen,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  boxSIZED_10,
+                  _buildTextField(fullNameController, "Enter your full name"),
+                  boxSIZED_20,
+                  Text(
+                    "2. Date of Birth Provided Earlier",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: black,
+                    ),
                   ),
-                ),
-                style: const TextStyle(
-                  height: 2.5,
-                ),
-              ),
-              boxSIZED_15,
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "2. Date of Birth Given Previously",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: black,
+                  boxSIZED_10,
+                  _buildDatePicker(
+                      dobController, context, "Select your date of birth"),
+                  boxSIZED_20,
+                  Text(
+                    "3. Childhood Best Friend's Name",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: black,
+                    ),
                   ),
-                ),
-              ),
-              boxSIZED_10,
-              TextField(
-                controller: dobController,
-                decoration: InputDecoration(
-                  labelText: "Date of Birth",
-                  fillColor: primaryGreen,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  boxSIZED_10,
+                  _buildTextField(
+                      friendNameController, "Enter your best friend's name"),
+                  boxSIZED_20,
+                  Text(
+                    "4. Childhood Pet's Name",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: black,
+                    ),
                   ),
-                ),
-                style: const TextStyle(
-                  height: 2.5,
-                ),
+                  boxSIZED_10,
+                  _buildTextField(petNameController, "Enter your pet's name"),
+                  boxSIZED_30,
+                ],
               ),
-              boxSIZED_15,
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "3. Childhood Best Friend's Name Given Previously",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: black,
-                  ),
-                ),
-              ),
-              boxSIZED_10,
-              TextField(
-                controller: friendNameController,
-                decoration: InputDecoration(
-                  labelText: "Childhood Best Friend's Name",
-                  fillColor: primaryGreen,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                style: const TextStyle(
-                  height: 2.5,
-                ),
-              ),
-              boxSIZED_15,
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "4. Childhood Pet's Name Given Previously",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: black,
-                  ),
-                ),
-              ),
-              boxSIZED_10,
-              TextField(
-                controller: petNameController,
-                decoration: InputDecoration(
-                  labelText: "Childhood Pet's Name",
-                  fillColor: primaryGreen,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                style: const TextStyle(
-                  height: 2.5,
-                ),
-              ),
-              boxSIZED_25,
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
@@ -178,7 +122,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
                     );
                   },
                   child: const Text(
-                    "Enter",
+                    "Submit",
                     style: TextStyle(
                       color: whiteColor,
                     ),
@@ -191,4 +135,52 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
       ),
     );
   }
+}
+
+// Helper method to build text fields
+Widget _buildTextField(TextEditingController controller, String hintText) {
+  return TextField(
+    controller: controller,
+    decoration: InputDecoration(
+      labelText: hintText,
+      fillColor: primaryGreen.withOpacity(0.1),
+      filled: true,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+  );
+}
+
+// Helper method for date picker field
+Widget _buildDatePicker(
+    TextEditingController controller, BuildContext context, String hintText) {
+  return GestureDetector(
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+      );
+      if (pickedDate != null) {
+        controller.text =
+            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+      }
+    },
+    child: AbsorbPointer(
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: hintText,
+          fillColor: primaryGreen.withOpacity(0.1),
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          prefixIcon: Icon(Icons.calendar_month),
+        ),
+      ),
+    ),
+  );
 }

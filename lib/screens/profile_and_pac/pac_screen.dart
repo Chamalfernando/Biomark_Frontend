@@ -5,10 +5,8 @@ import 'package:biomark/screens/profile_and_pac/profile_screen.dart';
 import 'package:biomark/services/backend_service.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart'; // If formatting the date or time is necessary
-// import 'dart:io' show Platform; // For platform detection
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:intl/intl.dart'; // If formatting the date or time is necessary
 
 class PACScreen extends StatefulWidget {
   const PACScreen({
@@ -29,31 +27,6 @@ class _PACScreenState extends State<PACScreen> {
         getPacDataById(); // Fetch PAC data by user ID when the screen loads
     customLogger.i("navigate to the PAC screen");
   }
-
-  // Function to show Perks toast
-  // void _showPerksToast() {
-  //   Fluttertoast.showToast(
-  //     msg:
-  //         "Perks will be available soon after the predictive model building 1st phase completed!",
-  //     toastLength: Toast.LENGTH_SHORT,
-  //     gravity: ToastGravity.BOTTOM,
-  //     backgroundColor: Colors.green,
-  //     textColor: Colors.white,
-  //     fontSize: 16.0,
-  //   );
-  // }
-
-  // Function to show Subscribe toast
-  // void _showSubscribeToast() {
-  //   Fluttertoast.showToast(
-  //     msg: "Subscription is not available at the moment.",
-  //     toastLength: Toast.LENGTH_SHORT,
-  //     gravity: ToastGravity.BOTTOM,
-  //     backgroundColor: Colors.red,
-  //     textColor: Colors.white,
-  //     fontSize: 16.0,
-  //   );
-  // }
 
   void _showPerksToast() {
     ScaffoldMessenger.of(context).showSnackBar(

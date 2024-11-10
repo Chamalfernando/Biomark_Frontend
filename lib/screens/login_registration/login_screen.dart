@@ -78,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
             // ignore: use_build_context_synchronously
             context,
             "/normalprofilescreen",
+            arguments: {
+              'authMail': email,
+            },
           );
         } else {
           // Handle the case where user data is missing in Firestore
@@ -295,21 +298,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 elevation: 5,
                               ),
-                              // onPressed: () {
-                              //   _isFormDisabled
-                              //       ? null
-                              //       : _loginWithEmailPassword(); // Disable button if form is disabled
-                              //   // _loginWithEmailPassword();
-                              //   if (_loginFormGlobalKey.currentState!
-                              //       .validate()) {
-                              //     _loginFormGlobalKey.currentState!.save();
-                              //     _loginFormGlobalKey.currentState!.reset();
-                              //     // Navigator.pushNamed(
-                              //     //   context,
-                              //     //   "/normalprofilescreen",
-                              //     // );
-                              //   }
-                              // },
                               onPressed: () {
                                 if (!_isFormDisabled) {
                                   if (_loginFormGlobalKey.currentState!
@@ -332,24 +320,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               boxSIZED_20,
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        "/forgotpasswordscreen",
-                      );
-                    },
-                    child: const Text(
-                      'Forgot Your Password?',
-                      style: TextStyle(
-                        color: commonRed,
-                        decoration: TextDecoration
-                            .underline, // Underline the text to make it look like a link
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.pushNamed(
+                  //       context,
+                  //       "/forgotpasswordscreen",
+                  //     );
+                  //   },
+                  //   child: const Text(
+                  //     'Forgot Your Password?',
+                  //     style: TextStyle(
+                  //       color: commonRed,
+                  //       decoration: TextDecoration
+                  //           .underline, // Underline the text to make it look like a link
+                  //     ),
+                  //   ),
+                  // ),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(

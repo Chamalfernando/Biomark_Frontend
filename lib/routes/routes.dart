@@ -58,8 +58,11 @@ class RouteHandler extends StatelessWidget {
               builder: (context) => const AccountRecoveryScreen(),
             );
           case "/normalprofilescreen":
+            // final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
-              builder: (context) => NormalProfileScreen(),
+              builder: (context) => NormalProfileScreen(
+                  // email: args['authMail'],
+                  ),
             );
           case "/paccreatingscreen":
             return MaterialPageRoute(

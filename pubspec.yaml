@@ -48,7 +48,6 @@ dependencies:
   logger:
   encrypt:
   flutter_secure_storage:
-  fluttertoast:
 
 dev_dependencies:
   flutter_test:
