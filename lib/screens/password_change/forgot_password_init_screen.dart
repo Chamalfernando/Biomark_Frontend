@@ -24,105 +24,97 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('Forgot Password 1'),
         backgroundColor: primaryGreen,
+        elevation: 0, // Remove shadow for a clean header
         centerTitle: true,
       ),
       backgroundColor: whiteColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
               children: [
-                boxSIZED_20,
+                boxSIZED_30,
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(
-                    'assets/BioMark.png',
-                  ),
+                  backgroundImage: AssetImage('assets/BioMark.png'),
                 ),
                 boxSIZED_40,
                 const Text(
                   "Forgot Password ?",
                   style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 28.0,
+                    fontWeight: FontWeight.bold,
                     color: errorRed,
                   ),
                 ),
-                boxSIZED_40,
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Provide your email and we'll send a six digit code to verify.",
+                boxSIZED_20,
+                const Text(
+                  "Enter your email address to receive a 6-digit verification code.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.grey,
                   ),
                 ),
-                boxSIZED_10,
+                boxSIZED_30,
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    labelText: "Email",
-                    fillColor: primaryGreen,
+                    labelText: "Email Address",
+                    labelStyle: TextStyle(color: Colors.grey.shade700),
+                    fillColor: Colors.grey.shade200,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                  style: const TextStyle(
-                    height: 2.5,
-                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(fontSize: 16, height: 1.5),
+                  onChanged: (value) {
+                    // Add real-time email validation logic here
+                  },
                   // have to implement logic for the email validation and email retrieval part.
                 ),
                 boxSIZED_20,
-                Align(
-                  alignment: Alignment.centerRight,
+                SizedBox(
+                  width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: black,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
+                      backgroundColor: primaryGreen,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     onPressed: () {
-                      setState(() {});
-
-                      //TODO have to get a notification or a popup msg of a code.
+                      // Logic to handle email submission and loading
                     },
                     child: const Text(
-                      "Enter",
-                      style: TextStyle(
-                        color: whiteColor,
-                      ),
+                      "Send Code",
+                      style: TextStyle(fontSize: 18, color: whiteColor),
                     ),
                   ),
                 ),
-                // Login Button
-
                 boxSIZED_25,
-
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: const Divider(
-                    color: black,
-                    thickness: 2,
-                  ),
-                ),
-                boxSIZED_10,
+                Divider(color: Colors.grey.shade400),
+                boxSIZED_20,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Didn't receive an email msg? ",
+                      "Didn't receive an email? ",
+                      style: TextStyle(color: Colors.black87),
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.pushNamed(context, "/recoveraccscreen");
+                        // Logic for resending email
                       },
                       child: const Text(
-                        'Resend Email',
+                        'Resend',
                         style: TextStyle(
                           color: smsResendBlue,
                           decoration: TextDecoration.underline,
@@ -131,23 +123,26 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                     ),
                   ],
                 ),
-                boxSIZED_15,
+                boxSIZED_20,
                 TextField(
                   controller: smsController,
                   decoration: InputDecoration(
-                    labelText: "Enter Code here",
-                    fillColor: primaryGreen,
+                    labelText: "Enter Verification Code",
+                    labelStyle: TextStyle(color: Colors.grey.shade700),
+                    fillColor: Colors.grey.shade200,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                  style: const TextStyle(
-                    height: 2.5,
-                  ),
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(fontSize: 16, height: 1.5),
+                  onChanged: (value) {
+                    // Add code validation logic here
+                  },
                 ),
-
-                boxSIZED_25,
+                boxSIZED_30,
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
@@ -162,17 +157,13 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        "/forgotpwsecondscreen",
-                      );
+                      // Navigate to the next screen or show success
+                      Navigator.pushNamed(context, "/forgotpwsecondscreen");
                     },
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: whiteColor,
-                    ),
+                    child: const Icon(Icons.arrow_forward, color: whiteColor),
                   ),
                 ),
+                boxSIZED_40,
               ],
             ),
           ],

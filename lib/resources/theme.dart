@@ -25,6 +25,10 @@ const SizedBox boxSIZED_20 = SizedBox(
 const SizedBox boxSIZED_25 = SizedBox(
   height: 25,
 );
+
+const SizedBox boxSIZED_30 = SizedBox(
+  height: 30,
+);
 const SizedBox boxSIZED_40 = SizedBox(
   height: 40,
 );

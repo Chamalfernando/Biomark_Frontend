@@ -65,11 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
             .get();
 
         if (userDoc.exists) {
-          Map<String, dynamic> userData =
-              userDoc.data() as Map<String, dynamic>;
+          // Map<String, dynamic> userData =
+          //     userDoc.data() as Map<String, dynamic>;
 
           // You can now access additional fields like fullName, dob, etc.
-          var fullName = userData['fullName'];
+          // var fullName = userData['fullName'];
 
           // Successful login
           _loginFormGlobalKey.currentState!.reset();
@@ -78,9 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
             // ignore: use_build_context_synchronously
             context,
             "/normalprofilescreen",
-            arguments: {
-              "userFullName": fullName,
-            },
           );
         } else {
           // Handle the case where user data is missing in Firestore
@@ -160,7 +157,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('Login'),
         backgroundColor: primaryGreen,
         centerTitle: true,
         automaticallyImplyLeading: false, // Removes the back button
@@ -170,232 +166,252 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  // Space between appBar and image
-                  boxSIZED_20,
-                  // rounded image
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage(
-                      'assets/BioMark.png',
+              boxSIZED_20,
+              // Hero section with logo
+              Center(
+                child: Column(
+                  children: [
+                    // Space between appBar and image
+                    // boxSIZED_20,
+                    // rounded image
+                    const CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/BioMark.png'),
                     ),
-                  ),
-                  // Space between image and fields
-                  boxSIZED_40,
-                  const CommonTopic(
-                    topic: "Welcome to Biomark",
-                  ),
-                  // Space between image and fields
-                  boxSIZED_40,
-                  Form(
-                    key: _loginFormGlobalKey,
-                    child: Column(
-                      children: [
-                        // Email TextFormField
-                        TextFormField(
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                    // Space between image and fields
+                    boxSIZED_20,
+                    // const CommonTopic(
+                    //   topic: "Welcome to Biomark",
+                    // ),
+                    const Text(
+                      "Welcome to BioMark",
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: primaryGreen,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    // Space between image and fields
+                    boxSIZED_10,
+                    const Text(
+                      "Sign in to continue",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Color.fromARGB(224, 117, 117, 117),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    // boxSIZED_25,
+                  ],
+                ),
+              ),
+              boxSIZED_40,
+              Form(
+                key: _loginFormGlobalKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Email TextFormField
+                    TextFormField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: const TextStyle(color: black),
+                        fillColor: Colors.grey.shade200,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      style: const TextStyle(
+                        height: 2.5,
+                      ),
+                      enabled:
+                          !_isFormDisabled, // Disable if max attempts reached
+                      validator: validateEmail,
+                      onSaved: (value) {
+                        emailController.text = value!;
+                      },
+                    ),
+                    // Space between Email and Password fields
+                    boxSIZED_20,
+                    // Password TextField
+                    TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: const TextStyle(color: black),
+                        fillColor: Colors.grey.shade200,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        // Add the eye icon in the suffixIcon
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            // Change the icon based on the password visibility state
+                            _obscurePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                           ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          enabled:
-                              !_isFormDisabled, // Disable if max attempts reached
-                          validator: validateEmail,
-                          onSaved: (value) {
-                            emailController.text = value!;
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
                           },
                         ),
-                        // Space between Email and Password fields
-                        boxSIZED_20,
-                        // Password TextField
-                        TextFormField(
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            // Add the eye icon in the suffixIcon
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // Change the icon based on the password visibility state
-                                _obscurePassword
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscurePassword = !_obscurePassword;
-                                });
-                              },
-                            ),
-                          ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          obscureText: !_obscurePassword,
-                          showCursor: true,
-                          validator: validatePassword,
-                          onSaved: (value) {
-                            passwordController.text = value!;
-                          },
-                          enabled:
-                              !_isFormDisabled, // Disable if max attempts reached
-                        ),
-                        boxSIZED_20,
-                        _isLoading
-                            ? CircularProgressIndicator()
-                            : ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: loginRegistColor,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 40,
-                                    vertical: 15,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                      ),
+                      style: const TextStyle(
+                        height: 2.5,
+                      ),
+                      obscureText: !_obscurePassword,
+                      showCursor: true,
+                      validator: validatePassword,
+                      onSaved: (value) {
+                        passwordController.text = value!;
+                      },
+                      enabled:
+                          !_isFormDisabled, // Disable if max attempts reached
+                    ),
+                    boxSIZED_20,
+                    Center(
+                      child: _isLoading
+                          ? CircularProgressIndicator()
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: loginRegistColor,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 40,
+                                  vertical: 15,
                                 ),
-                                onPressed: () {
-                                  _isFormDisabled
-                                      ? null
-                                      : _loginWithEmailPassword(); // Disable button if form is disabled
-                                  // _loginWithEmailPassword();
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 5,
+                              ),
+                              // onPressed: () {
+                              //   _isFormDisabled
+                              //       ? null
+                              //       : _loginWithEmailPassword(); // Disable button if form is disabled
+                              //   // _loginWithEmailPassword();
+                              //   if (_loginFormGlobalKey.currentState!
+                              //       .validate()) {
+                              //     _loginFormGlobalKey.currentState!.save();
+                              //     _loginFormGlobalKey.currentState!.reset();
+                              //     // Navigator.pushNamed(
+                              //     //   context,
+                              //     //   "/normalprofilescreen",
+                              //     // );
+                              //   }
+                              // },
+                              onPressed: () {
+                                if (!_isFormDisabled) {
                                   if (_loginFormGlobalKey.currentState!
                                       .validate()) {
                                     _loginFormGlobalKey.currentState!.save();
-                                    _loginFormGlobalKey.currentState!.reset();
-                                    // Navigator.pushNamed(
-                                    //   context,
-                                    //   "/normalprofilescreen",
-                                    // );
+                                    _loginWithEmailPassword();
                                   }
-                                },
-                                child: const Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    color: whiteColor,
-                                  ),
+                                }
+                              },
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: whiteColor,
                                 ),
                               ),
-                      ],
+                            ),
                     ),
-                  ),
-
-                  boxSIZED_25,
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          "/forgotpasswordscreen",
-                        );
-                      },
-                      child: const Text(
-                        'Forgot Your Password?',
-                        style: TextStyle(
-                          color: commonRed,
-                          decoration: TextDecoration
-                              .underline, // Underline the text to make it look like a link
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          "/loginfailscreen",
-                        );
-                      },
-                      child: const Text(
-                        'Login Failed?',
-                        style: TextStyle(
-                          color: commonRed,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  boxSIZED_10,
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          "/recoveraccscreen",
-                        );
-                      },
-                      child: const Text(
-                        'Recover Account?',
-                        style: TextStyle(
-                          color: commonRed,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  boxSIZED_15,
-                  // Horizontal line (Divider) with specific width
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: const Divider(
-                      color: Colors.black,
-                      thickness: 2,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  const Text(
-                    'New to Biomark?',
-                    style: TextStyle(
-                      color: commonRed,
-                    ),
-                  ),
-                  boxSIZED_15,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: loginRegistColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
+                  ],
+                ),
+              ),
+              boxSIZED_20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
                       Navigator.pushNamed(
                         context,
-                        "/registrationscreen",
+                        "/forgotpasswordscreen",
                       );
                     },
                     child: const Text(
-                      "SignUp",
+                      'Forgot Your Password?',
                       style: TextStyle(
-                        color: whiteColor,
+                        color: commonRed,
+                        decoration: TextDecoration
+                            .underline, // Underline the text to make it look like a link
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        "/recoveraccscreen",
+                      );
+                    },
+                    child: const Text(
+                      'Recover Account?',
+                      style: TextStyle(
+                        color: commonRed,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
                 ],
+              ),
+              boxSIZED_25,
+              Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: const Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                      ),
+                    ),
+                    boxSIZED_15,
+                    const Text(
+                      'New to Biomark?',
+                      style: TextStyle(
+                        color: commonRed,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    boxSIZED_15,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: loginRegistColor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          "/registrationscreen",
+                        );
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(color: whiteColor),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

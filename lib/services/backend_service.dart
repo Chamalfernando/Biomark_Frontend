@@ -4,58 +4,61 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://localhost:3000'; // Your backend URL
+const String baseUrl = 'http://localhost:3000/api'; // Your backend URL
 
 Future<Pac?> getPacDataById() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  final id = prefs.getString("userUniqueId");
 
-  String? id = prefs.getString("userUniqueId");
+  // final id = getUserUniqueId();
 
-  final url = '$baseUrl/pac/$id'; // The endpoint you defined in the backend
+  final url = "$baseUrl/pac/$id"; // The endpoint you defined in the backend
+
+  customLogger.i("userUniqueId = $id");
+  print(url);
+  customLogger.i("Url is $url");
 
   try {
+    customLogger.i("inside the try before get");
     final response = await http.get(
       Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
     );
-
+    customLogger.i("Status Code is ${response.statusCode}");
+    //
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
+      customLogger.i("User Data fetched ${jsonData.toString()}");
+      // Ensure the returned JSON data is not null
+      if (jsonData != null && jsonData.isNotEmpty) {
+        return Pac.fromJson(jsonData);
+      } else {
+        customLogger.e('Empty PAC data received');
+        return null;
+      }
+    } else if (response.statusCode == 304) {
+      final jsonData = jsonDecode(response.body);
+      customLogger.e('User Data has not been changed: ${response.statusCode}');
       return Pac.fromJson(jsonData);
     } else {
       customLogger.e('Failed to load PAC data: ${response.statusCode}');
+      return null; // Return null to indicate failure
     }
   } catch (error) {
     customLogger.e('Error: $error');
+    return null;
   }
-  return null;
 }
 
 Future<String?> getUserUniqueId() async {
   final prefs = await SharedPreferences.getInstance();
+  customLogger.i(prefs.getString('userUniqueId'));
   return prefs.getString('userUniqueId');
 }
 
-Future<void> fetchPacData() async {
+Future<void> loadUserData() async {
   final userId = await getUserUniqueId();
-
-  if (userId != null) {
-    final response = await http.get(
-      Uri.parse('http://localhost:3000/pac/$userId'),
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    if (response.statusCode == 200) {
-      // Handle the retrieved PAC data
-
-      // final pacData = jsonDecode(response.body);
-
-      // Do something with pacData
-    } else {
-      // Handle error
-    }
-  } else {
-    print("no PAC data for the user.");
-  }
+  customLogger.i("User ID void: $userId");
 }
 
 // Future<String?> removeUserUniqueId() async {

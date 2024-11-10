@@ -22,10 +22,10 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
   @override
   void initState() {
     super.initState();
+    customLogger.i("navigate to the PAC creation screen");
   }
 
   // final prefs = SharedPreferences.getInstance();
-  //   customLogger.i("navigate to the PAC creation screen");
   //   customLogger.i(prefs.getString("userUniqueId"));
   //   customLogger.i(prefs.getString("ROLE_1"));
   //   customLogger.i(prefs.getBool("ROLE_2"));
@@ -130,7 +130,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
 
       // Send data to Express.js backend
       final response = await http.post(
-        Uri.parse('http://localhost:3000/pac-create'),
+        Uri.parse('http://localhost:3000/api/pac-create'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(formData),
       );
@@ -175,6 +175,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
         );
       } else {
         // Handle error
+        customLogger.e("Error when creating pac");
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -546,7 +547,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                       onChanged: (value) {
                         setState(
                           () {
-                            selectedEyeColor = value;
+                            selectedEyeColor = value!;
                           },
                         );
                       },
@@ -578,7 +579,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                             "/pacscreen",
                           );
                         }
-                        // submitData();
+                        submitData();
                       },
                       child: const Text(
                         "Create PAC",

@@ -18,11 +18,6 @@ class RouteHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: (RouteSettings settings) {
-        // if (settings.arguments is List) {
-        //   print("Arguments is a list");
-        // } else {
-        //   print("Arguments is not a list");
-        // }
         switch (settings.name) {
           case "/":
             return MaterialPageRoute(
@@ -44,8 +39,6 @@ class RouteHandler extends StatelessWidget {
             final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
               builder: (context) => SecurityQuestionsScreen(
-                // firstName: args['firstName'],
-                // lastName: args['lastName'],
                 email: args['email'],
                 dob: args['dob'],
                 fullName: args['fullName'],
@@ -65,7 +58,6 @@ class RouteHandler extends StatelessWidget {
               builder: (context) => const AccountRecoveryScreen(),
             );
           case "/normalprofilescreen":
-            final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
               builder: (context) => NormalProfileScreen(),
             );

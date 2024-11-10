@@ -62,7 +62,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
             _userRole = userData.data()?['role'] ?? 'No user Role provided';
             _isLoading = false;
             // _passWord = EncryptionService.decrypt(_passWord);
-            customLogger.i("userData fetched");
+            customLogger.i("userData fetched in found condition");
           });
         } else {
           // Handle the case where user data is missing
@@ -162,9 +162,14 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
           ),
         ),
       );
-      Navigator.pop(
+      // Navigator.pop(
+      //   // ignore: use_build_context_synchronously
+      //   context,
+      // );
+      Navigator.pushReplacementNamed(
         // ignore: use_build_context_synchronously
         context,
+        "/login",
       );
       customLogger.i("successfully logged out!");
     } catch (e) {
@@ -188,6 +193,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
         ),
         backgroundColor: primaryGreen,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: whiteColor,
       body: SingleChildScrollView(
@@ -421,6 +427,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                         ),
                       ),
                       onPressed: () {
+                        customLogger.i("edit button clicked");
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -479,6 +486,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       ),
                     ),
                     onPressed: () {
+                      customLogger.i("pac creation clicked");
                       Navigator.pushNamed(
                         context,
                         "/paccreatingscreen",
@@ -504,6 +512,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                       ),
                     ),
                     onPressed: () {
+                      customLogger.i("unsubscribe button clicked");
                       // Navigator.pushNamed(
                       //   context,
                       //   "/pacscreen",
@@ -511,6 +520,32 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                     },
                     child: const Text(
                       "Unsubscribe",
+                      style: TextStyle(
+                        color: whiteColor,
+                      ),
+                    ),
+                  ),
+                  boxSIZED_15,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: topicGreen,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      customLogger.i("Go to PAC Screen");
+                      Navigator.pushNamed(
+                        context,
+                        "/pacscreen",
+                      );
+                    },
+                    child: const Text(
+                      "PAC",
                       style: TextStyle(
                         color: whiteColor,
                       ),
