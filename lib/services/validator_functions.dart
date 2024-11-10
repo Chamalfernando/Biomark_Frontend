@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; // for bcrypt
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // for bcrypt
 
 String? validateEmail(String? value) {
   // Basic null/empty check
@@ -77,15 +78,30 @@ String? validateLastName(String? value) {
   return null; // Return null if valid
 }
 
-String? validateFullName(String? value, String firstName, String lastName) {
+// String? validateFullName(String? value, String firstName, String lastName) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your full name';
+//   }
+
+//   // Ensure the full name contains both the first and last names as words
+//   if (!value.toLowerCase().contains(firstName.toLowerCase()) ||
+//       !value.toLowerCase().contains(lastName.toLowerCase())) {
+//     return 'Full name must include both first and last names';
+//   }
+
+//   return null; // Return null if valid
+// }
+
+String? validateFullName(String? value) {
   if (value == null || value.isEmpty) {
     return 'Please enter your full name';
   }
 
-  // Ensure the full name contains both the first and last names as words
-  if (!value.toLowerCase().contains(firstName.toLowerCase()) ||
-      !value.toLowerCase().contains(lastName.toLowerCase())) {
-    return 'Full name must include both first and last names';
+  // Regular expression to ensure full name contains only letters and spaces between words
+  RegExp nameRegExp = RegExp(r'^[a-zA-Z]+(?: [a-zA-Z]+)*$');
+
+  if (!nameRegExp.hasMatch(value)) {
+    return 'Full name can only contain letters and spaces';
   }
 
   return null; // Return null if valid
@@ -118,19 +134,48 @@ String? validateDOB(String? value) {
 //   return BCrypt.checkpw(password, hashedPassword);
 // }
 
-String? validateTimeOfBirth(TimeOfDay selectedTime) {
-  final now = TimeOfDay.now();
-  if (selectedTime.hour > now.hour ||
-      (selectedTime.hour == now.hour && selectedTime.minute > now.minute)) {
-    return 'Time of birth cannot be in the future.';
+String? validateTimeOfBirth(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Time of birth cannot be null';
   }
   return null; // Return null if valid
 }
 
+// Function to validate TimeOfBirth with selectedTime as TimeOfDay
+// String? validateTimeOfBirth(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please select the time of birth.';
+//   }
+
+//   // Parse the value from string to TimeOfDay (assuming the format is like '2:49 PM')
+//   final parsedTime = _parseTime(value);
+//   if (parsedTime == null) {
+//     return 'Invalid time format.';
+//   }
+
+//   final now = TimeOfDay.now();
+//   if (parsedTime.hour > now.hour ||
+//       (parsedTime.hour == now.hour && parsedTime.minute > now.minute)) {
+//     return 'Time of birth cannot be in the future.';
+//   }
+//   return null; // Return null if valid
+// }
+
+// Function to parse String to TimeOfDay (use 24-hour format if needed)
+// TimeOfDay? _parseTime(String value) {
+//   try {
+//     final format = DateFormat.jm(); // e.g., 2:49 PM
+//     final dateTime = format.parse(value);
+//     return TimeOfDay.fromDateTime(dateTime);
+//   } catch (e) {
+//     return null;
+//   }
+// }
+
 String? validateLocation(String location) {
   if (location.isEmpty) {
     return 'Location cannot be empty';
-  } else if (location.length < 2) {
+  } else if (location.length < 3) {
     return 'Location name is too short';
   }
   return null; // Return null if valid

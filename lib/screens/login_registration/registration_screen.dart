@@ -96,49 +96,49 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     key: _registrationFormGlobalKey,
                     child: Column(
                       children: [
-                        TextFormField(
-                          controller: firstNameController,
-                          decoration: InputDecoration(
-                            labelText: "First Name",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          validator: (value) => validateFirstName(value),
-                          onSaved: (value) {
-                            firstNameController.text = value!;
-                          },
-                        ),
-                        boxSIZED_15,
-                        TextFormField(
-                          controller: lastNameController,
-                          decoration: InputDecoration(
-                            labelText: "Last Name",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person_2,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          validator: (value) => validateLastName(value),
-                          onSaved: (value) {
-                            lastNameController.text = value!;
-                          },
-                        ),
+                        // TextFormField(
+                        //   controller: firstNameController,
+                        //   decoration: InputDecoration(
+                        //     labelText: "First Name",
+                        //     fillColor: primaryGreen,
+                        //     filled: true,
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     prefixIcon: const Icon(
+                        //       Icons.person,
+                        //     ),
+                        //   ),
+                        //   style: const TextStyle(
+                        //     height: 2.5,
+                        //   ),
+                        //   validator: (value) => validateFirstName(value),
+                        //   onSaved: (value) {
+                        //     firstNameController.text = value!;
+                        //   },
+                        // ),
+                        // boxSIZED_15,
+                        // TextFormField(
+                        //   controller: lastNameController,
+                        //   decoration: InputDecoration(
+                        //     labelText: "Last Name",
+                        //     fillColor: primaryGreen,
+                        //     filled: true,
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     prefixIcon: const Icon(
+                        //       Icons.person_2,
+                        //     ),
+                        //   ),
+                        //   style: const TextStyle(
+                        //     height: 2.5,
+                        //   ),
+                        //   validator: (value) => validateLastName(value),
+                        //   onSaved: (value) {
+                        //     lastNameController.text = value!;
+                        //   },
+                        // ),
                         boxSIZED_15,
                         TextFormField(
                           controller: fullNameController,
@@ -160,10 +160,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             fullNameController.text = value!;
                           },
                           validator: (value) {
-                            return validateFullName(
-                                value,
-                                firstNameController.text,
-                                lastNameController.text);
+                            // return validateFullName(
+                            //     value,
+                            //     firstNameController.text,
+                            //     lastNameController.text);
+                            return validateFullName(value);
                           },
                         ),
                         boxSIZED_15,
@@ -282,8 +283,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     context,
                                     "/securityquestscreen",
                                     arguments: {
-                                      'firstName': firstNameController.text,
-                                      'lastName': lastNameController.text,
+                                      // 'firstName': firstNameController.text,
+                                      // 'lastName': lastNameController.text,
                                       'fullName': fullNameController.text,
                                       'dob': dobController.text,
                                       'email': emailController.text,

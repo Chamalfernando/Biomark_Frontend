@@ -4,19 +4,40 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const String baseUrl = 'http://localhost:3000'; // Your backend URL
+
+Future<Pac?> getPacDataById() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  String? id = prefs.getString("userUniqueId");
+
+  final url = '$baseUrl/pac/$id'; // The endpoint you defined in the backend
+
+  try {
+    final response = await http.get(
+      Uri.parse(url),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return Pac.fromJson(jsonData);
+    } else {
+      customLogger.e('Failed to load PAC data: ${response.statusCode}');
+    }
+  } catch (error) {
+    customLogger.e('Error: $error');
+  }
+  return null;
+}
+
 Future<String?> getUserUniqueId() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getString('userUniqueId');
 }
 
-Future<String?> removeUserUniqueId() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.remove('userUniqueId');
-  return "user unique id removed";
-}
-
 Future<void> fetchPacData() async {
   final userId = await getUserUniqueId();
+
   if (userId != null) {
     final response = await http.get(
       Uri.parse('http://localhost:3000/pac/$userId'),
@@ -36,6 +57,12 @@ Future<void> fetchPacData() async {
     print("no PAC data for the user.");
   }
 }
+
+// Future<String?> removeUserUniqueId() async {
+//   final prefs = await SharedPreferences.getInstance();
+//   await prefs.remove('userUniqueId');
+//   return "user unique id removed";
+// }
 
 Future<String?> getUserRole() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -75,30 +102,5 @@ void checkUserVolunteer() async {
     // Perform role-specific actions
   } else {
     customLogger.i("User is not a VOLUNTEER");
-  }
-}
-
-class PacService {
-  static const String baseUrl = 'http://localhost:3000'; // Your backend URL
-
-  Future<Pac?> getPacById() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? id = prefs.getString("userUniqueId");
-
-    final url = '$baseUrl/pac/$id'; // The endpoint you defined in the backend
-
-    try {
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        final jsonData = jsonDecode(response.body);
-        return Pac.fromJson(jsonData);
-      } else {
-        print('Failed to load PAC data: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
-    return null;
   }
 }

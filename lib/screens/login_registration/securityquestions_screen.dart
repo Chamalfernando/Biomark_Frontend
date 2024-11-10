@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class SecurityQuestionsScreen extends StatefulWidget {
-  final String firstName;
-  final String lastName;
+  // final String firstName;
+  // final String lastName;
   final String fullName;
   final String dob;
   final String email;
@@ -18,8 +18,8 @@ class SecurityQuestionsScreen extends StatefulWidget {
 
   const SecurityQuestionsScreen({
     super.key,
-    required this.firstName,
-    required this.lastName,
+    // required this.firstName,
+    // required this.lastName,
     required this.fullName,
     required this.dob,
     required this.email,
@@ -63,20 +63,20 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
             .createUserWithEmailAndPassword(email: email, password: passWord);
 
         // Encrypt sensitive data
-        String encFullName = EncryptionService.encrypt(widget.fullName);
-        String encDateOfBirth = EncryptionService.encrypt(widget.dob);
-        String encMaidenName =
-            EncryptionService.encrypt(mMaidenNameController.text);
-        String encBestFriendName =
-            EncryptionService.encrypt(childrBestFriendNameController.text);
-        String encPetName =
-            EncryptionService.encrypt(childPetNameController.text);
-        String encCustomQuestion =
-            EncryptionService.encrypt(customQuestController.text);
-        String encCustomAnswer =
-            EncryptionService.encrypt(customAnsController.text);
-        String encEmail = EncryptionService.encrypt(email);
-        String encPassWord = EncryptionService.encrypt(passWord);
+        // String encFullName = EncryptionService.encrypt(widget.fullName);
+        // String encDateOfBirth = EncryptionService.encrypt(widget.dob);
+        // String encMaidenName =
+        //     EncryptionService.encrypt(mMaidenNameController.text);
+        // String encBestFriendName =
+        //     EncryptionService.encrypt(childrBestFriendNameController.text);
+        // String encPetName =
+        //     EncryptionService.encrypt(childPetNameController.text);
+        // String encCustomQuestion =
+        //     EncryptionService.encrypt(customQuestController.text);
+        // String encCustomAnswer =
+        //     EncryptionService.encrypt(customAnsController.text);
+        // String encEmail = EncryptionService.encrypt(email);
+        // String encPassWord = EncryptionService.encrypt(passWord);
 
         // After successfully creating the Firebase Authentication user,
         // store additional user information in Firestore
@@ -84,12 +84,12 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
             .collection('users')
             .doc(userCredential.user!.uid)
             .set({
-          'firstName': widget.firstName,
-          'lastName': widget.lastName,
+          // 'firstName': widget.firstName,
+          // 'lastName': widget.lastName,
           'fullName': widget.fullName,
           'dob': widget.dob,
           'email': email,
-          'passWord': encPassWord,
+          'passWord': passWord,
           'maidenName': mMaidenNameController.text,
           'bestFriendName': childrBestFriendNameController.text,
           'petName': childPetNameController.text,
@@ -143,9 +143,12 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Security Questions'),
+        title: const Text(
+          'Security Questions',
+        ),
         backgroundColor: primaryGreen,
         centerTitle: true,
+        automaticallyImplyLeading: false, // Removes the back button
       ),
       backgroundColor: whiteColor,
       body: SingleChildScrollView(
@@ -163,8 +166,8 @@ class _SecurityQuestionsScreenState extends State<SecurityQuestionsScreen> {
                   ),
                 ),
                 boxSIZED_40,
-                Text('First Name: ${widget.firstName}'),
-                Text('Last Name: ${widget.lastName}'),
+                // Text('First Name: ${widget.firstName}'),
+                // Text('Last Name: ${widget.lastName}'),
                 Text('Full Name: ${widget.fullName}'),
                 Text('Date of Birth: ${widget.dob}'),
                 Text('Email: ${widget.email}'),

@@ -24,7 +24,7 @@ class _ForgotPassWordInitScreenState extends State<ForgotPassWordInitScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forgot Password 1'),
+        // title: const Text('Forgot Password 1'),
         backgroundColor: primaryGreen,
         centerTitle: true,
       ),

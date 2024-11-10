@@ -1,5 +1,6 @@
 import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/screens/login_registration/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordSecondScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _ForgotPasswordSecondScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forgot Password 2'),
+        // title: const Text('Forgot Password 2'),
         backgroundColor: primaryGreen,
         centerTitle: true,
       ),
@@ -111,9 +112,16 @@ class _ForgotPasswordSecondScreenState
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        "/normalprofilescreen",
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   "/login",
+                      // );
+                      // Navigate back to login screen without back button
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                        (Route<dynamic> route) => false,
                       );
                     },
                     child: const Text(
@@ -124,105 +132,7 @@ class _ForgotPasswordSecondScreenState
                     ),
                   ),
                 ),
-
                 boxSIZED_25,
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       Navigator.pushNamed(context, "/forgotpasswordscreen");
-                //     },
-                //     child: const Text(
-                //       'Forgot Your Password?',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //         decoration: TextDecoration
-                //             .underline, // Underline the text to make it look like a link
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       Navigator.pushNamed(context, "/loginfailscreen");
-                //     },
-                //     child: const Text(
-                //       'Login Failed?',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //         decoration: TextDecoration.underline,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       Navigator.pushNamed(context, "/recoveraccscreen");
-                //     },
-                //     child: const Text(
-                //       'Recover Account?',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //         decoration: TextDecoration.underline,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                // Horizontal line (Divider) with specific width
-                // SizedBox(
-                //   width: MediaQuery.of(context).size.width * 0.9,
-                //   child: const Divider(
-                //     color: Colors.black,
-                //     thickness: 2,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                // const Text(
-                //   'New to Biomark?',
-                //   style: TextStyle(
-                //     color: Colors.red,
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 25,
-                // ),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     backgroundColor: AppColors.black,
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 40, vertical: 15),
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //   ),
-                //   onPressed: () {
-                //     Navigator.pushNamed(
-                //       context,
-                //       "/registrationscreen",
-                //     );
-                //   },
-                //   child: const Text(
-                //     "SignUp",
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ],

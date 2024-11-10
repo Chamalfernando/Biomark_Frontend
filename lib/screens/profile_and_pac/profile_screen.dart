@@ -1,16 +1,14 @@
 import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/screens/profile_and_pac/popup_form.dart';
 import 'package:biomark/services/encyption_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NormalProfileScreen extends StatefulWidget {
-  final String userFullName;
-
   const NormalProfileScreen({
     super.key,
-    required this.userFullName,
   });
 
   @override
@@ -100,26 +98,53 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
   }
 
   // Update user data in Firestore
-  Future<void> _updateUserData(
-      String firstName, String lastName, String email) async {
+  // Future<void> _updateUserData(
+  //     String firstName, String lastName, String email, String passWord) async {
+  //   User? currentUser = FirebaseAuth.instance.currentUser;
+  //   try {
+  //     if (currentUser != null) {
+  //       await FirebaseFirestore.instance
+  //           .collection('users')
+  //           .doc(currentUser.uid)
+  //           .update({
+  //         'firstName': firstName,
+  //         'lastName': lastName,
+  //         'email': email,
+  //         'passWord': passWord,
+  //       });
+
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('User data successfully updated!')),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Failed to update user data: $e')),
+  //     );
+  //   }
+  // }
+
+  // Delete the user from Firestore and FirebaseAuth
+  Future<void> _deleteUser() async {
+    User? curntUser = FirebaseAuth.instance.currentUser;
     try {
-      if (_currentUser != null) {
+      if (curntUser != null) {
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(_currentUser!.uid)
-            .update({
-          'firstName': firstName,
-          'lastName': lastName,
-          'email': email,
-        });
+            .doc(curntUser.uid)
+            .delete();
+
+        await curntUser!.delete();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User data successfully updated!')),
+          const SnackBar(content: Text('User successfully deleted!')),
         );
+
+        Navigator.pushReplacementNamed(context, "/login");
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update user data: $e')),
+        SnackBar(content: Text('Failed to delete user: $e')),
       );
     }
   }
@@ -233,7 +258,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              _fullName,
+                              "$_fullName !",
                               style: const TextStyle(
                                 fontSize: 25.0,
                                 color: topicGreen,
@@ -353,27 +378,6 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                     ],
                   ),
                   boxSIZED_10,
-                  // Row(
-                  //   children: [
-                  //     const Align(
-                  //       alignment: Alignment.centerLeft,
-                  //       child: Text(
-                  //         "PassWord : ",
-                  //         style: TextStyle(
-                  //           fontSize: 20.0,
-                  //           color: black,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       _passWord,
-                  //       style: const TextStyle(
-                  //         fontSize: 20.0,
-                  //         color: smsResendBlue,
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                   Row(
                     children: [
                       Expanded(
@@ -417,10 +421,18 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   "/registrationscreen",
-                        // );
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EditDetailsPopup(
+                              fullName: _fullName,
+                              email: _email,
+                              dob: _dob,
+                              userRole: _userRole,
+                              password: _passWord,
+                            );
+                          },
+                        );
                       },
                       child: const Text(
                         "Edit",

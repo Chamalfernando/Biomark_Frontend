@@ -100,9 +100,11 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
     );
 
     if (pickedTime != null) {
+      // Update the controller with the formatted time string
       setState(
         () {
-          timeOfBirthController.text = pickedTime.format(context);
+          timeOfBirthController.text =
+              pickedTime.format(context); // Stores time as a string
         },
       );
     }
@@ -270,9 +272,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                           },
                         ),
                       ),
-                      validator: (value) => validateTimeOfBirth(
-                        value as TimeOfDay,
-                      ),
+                      validator: (value) => validateTimeOfBirth(value),
                     ),
                     boxSIZED_20,
                     // Location of Birth
@@ -448,33 +448,33 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                             ),
                           ],
                         ),
-                        boxSIZED_15,
-                        ElevatedButton(
-                          onPressed: () {
-                            // Call validateHeight on button press
-                            String? validationMessage = validateHeight();
-                            if (validationMessage != null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    validationMessage,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Height is valid!",
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                          child: Text(
-                            'Submit',
-                          ),
-                        ),
+                        // boxSIZED_15,
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     // Call validateHeight on button press
+                        //     String? validationMessage = validateHeight();
+                        //     if (validationMessage != null) {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         SnackBar(
+                        //           content: Text(
+                        //             validationMessage,
+                        //           ),
+                        //         ),
+                        //       );
+                        //     } else {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         SnackBar(
+                        //           content: Text(
+                        //             "Height is valid!",
+                        //           ),
+                        //         ),
+                        //       );
+                        //     }
+                        //   },
+                        //   child: Text(
+                        //     'Submit',
+                        //   ),
+                        // ),
                       ],
                     ),
                     boxSIZED_20,
@@ -578,7 +578,7 @@ class _PACCreatingScreenState extends State<PACCreatingScreen> {
                             "/pacscreen",
                           );
                         }
-                        submitData();
+                        // submitData();
                       },
                       child: const Text(
                         "Create PAC",

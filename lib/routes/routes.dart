@@ -44,9 +44,8 @@ class RouteHandler extends StatelessWidget {
             final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
               builder: (context) => SecurityQuestionsScreen(
-                // formKey: args['formKey'], // Pass the form key
-                firstName: args['firstName'],
-                lastName: args['lastName'],
+                // firstName: args['firstName'],
+                // lastName: args['lastName'],
                 email: args['email'],
                 dob: args['dob'],
                 fullName: args['fullName'],
@@ -68,9 +67,7 @@ class RouteHandler extends StatelessWidget {
           case "/normalprofilescreen":
             final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
-              builder: (context) => NormalProfileScreen(
-                userFullName: args['userFullName'],
-              ),
+              builder: (context) => NormalProfileScreen(),
             );
           case "/paccreatingscreen":
             return MaterialPageRoute(
