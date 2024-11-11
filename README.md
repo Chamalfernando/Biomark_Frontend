@@ -10,5 +10,3 @@ to build predictive machine learning models for personalising digital services.
 ## 2. Firestore Setup
 
 ## 3. Get the necessary dependencies
-
-## 4. 
