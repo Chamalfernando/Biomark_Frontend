@@ -139,7 +139,7 @@ class _AccountRecoveryScreenState extends State<AccountRecoveryScreen> {
 
 // Helper method to build text fields
 Widget _buildTextField(TextEditingController controller, String hintText) {
-  return TextField(
+  return TextFormField(
     controller: controller,
     decoration: InputDecoration(
       labelText: hintText,
@@ -149,6 +149,13 @@ Widget _buildTextField(TextEditingController controller, String hintText) {
         borderRadius: BorderRadius.circular(10),
       ),
     ),
+    validator: (value) {
+      if (value!.isEmpty) {
+        return "Provide a Value";
+      } else {
+        return null;
+      }
+    },
   );
 }
 

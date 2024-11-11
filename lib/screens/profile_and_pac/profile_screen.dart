@@ -189,12 +189,13 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
       appBar: AppBar(
         title: const Text(
           'Profile',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         backgroundColor: primaryGreen,
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      backgroundColor: whiteColor,
+      backgroundColor: Colors.grey.shade100,
       floatingActionButton: FloatingActionButton(
         onPressed: _logoutUser,
         backgroundColor: logoutColor,
@@ -205,35 +206,7 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // boxSIZED_10,
-              // Column(
-              //   children: [
-              //     Align(
-              //       alignment: Alignment.centerRight,
-              //       // logout mechanism to be implemented.
-              //       child: ElevatedButton(
-              //         style: ElevatedButton.styleFrom(
-              //           backgroundColor: logoutColor,
-              //           padding: const EdgeInsets.all(15),
-              //           shape:
-              //               const CircleBorder(), // Makes the button circular
-              //         ),
-              //         onPressed: () {
-              //           _logoutUser();
-              //           // Navigator.pushNamed(
-              //           //   context,
-              //           //   "/login",
-              //           // );
-              //         },
-              //         child: const Icon(
-              //           Icons.logout, // Logout icon
-              //           color: whiteColor,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              boxSIZED_40,
+              boxSIZED_20,
               const Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
@@ -244,321 +217,339 @@ class _NormalProfileScreenState extends State<NormalProfileScreen> {
                 ),
               ),
               boxSIZED_20,
-              Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    const Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          Text(
-                            'Hi There',
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              color: black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "$_fullName !",
-                              style: const TextStyle(
-                                fontSize: 25.0,
-                                color: topicGreen,
-                              ),
-                              // overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              // Welcome Message
+              Text(
+                'Hi There, $_fullName!',
+                style: const TextStyle(
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.bold,
+                  color: topicGreen,
                 ),
               ),
-              boxSIZED_20,
+              const SizedBox(height: 10),
+              const Divider(color: black, thickness: 2),
+              const SizedBox(height: 15),
+              // User Information
+              _buildUserInfoRow("Full Name", _fullName),
+              _buildUserInfoRow("Email", _email),
+              _buildUserInfoRow("Date Of Birth", _dob),
+              _buildUserInfoRow("PassWord", _passWord),
+              const SizedBox(height: 15),
+              // Edit Button
+              // Align(
+              //   alignment: Alignment.center,
+              //   child: Column(
+              //     children: [
+              //       const Align(
+              //         alignment: Alignment.center,
+              //         child: Row(
+              //           children: [
+              //             Text(
+              //               'Hi There',
+              //               style: TextStyle(
+              //                 fontSize: 25.0,
+              //                 color: black,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //       Align(
+              //         alignment: Alignment.center,
+              //         child: Row(
+              //           children: [
+              //             Expanded(
+              //               child: Text(
+              //                 "$_fullName !",
+              //                 style: const TextStyle(
+              //                   fontSize: 25.0,
+              //                   color: topicGreen,
+              //                 ),
+              //                 // overflow: TextOverflow.ellipsis,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // boxSIZED_20,
+              // const SizedBox(
+              //   child: Divider(
+              //     color: black,
+              //     thickness: 2,
+              //   ),
+              // ),
+              // boxSIZED_15,
+              // Column(
+              //   children: [
+              //     Row(
+              //       children: [
+              //         Expanded(
+              //           child: Text.rich(
+              //             TextSpan(
+              //               children: [
+              //                 const TextSpan(
+              //                   text: "Full Name: ",
+              //                   style: TextStyle(
+              //                     fontSize: 20.0,
+              //                     color: black,
+              //                   ),
+              //                 ),
+              //                 TextSpan(
+              //                   text: _fullName,
+              //                   style: const TextStyle(
+              //                     fontSize: 20.0,
+              //                     color:
+              //                         smsResendBlue, // Color for the second part
+              //                     overflow: TextOverflow.ellipsis,
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     boxSIZED_10,
+              //     Row(
+              //       children: [
+              //         const Text(
+              //           "Email : ",
+              //           style: TextStyle(
+              //             fontSize: 20.0,
+              //             color: black,
+              //           ),
+              //           // overflow: TextOverflow.ellipsis,
+              //         ),
+              //         Expanded(
+              //           child: Text(
+              //             _email,
+              //             style: const TextStyle(
+              //               fontSize: 20.0,
+              //               color: smsResendBlue,
+              //             ),
+              //             // overflow: TextOverflow.ellipsis,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     boxSIZED_10,
+              //     Row(
+              //       children: [
+              //         const Align(
+              //           alignment: Alignment.centerLeft,
+              //           child: Text(
+              //             "Date Of Birth : ",
+              //             style: TextStyle(
+              //               fontSize: 20.0,
+              //               color: black,
+              //             ),
+              //           ),
+              //         ),
+              //         Text(
+              //           _dob,
+              //           style: const TextStyle(
+              //             fontSize: 20.0,
+              //             color: smsResendBlue,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     boxSIZED_10,
+              // Row(
+              //   children: [
+              //     const Align(
+              //       alignment: Alignment.centerLeft,
+              //       child: Text(
+              //         "User Role : ",
+              //         style: TextStyle(
+              //           fontSize: 20.0,
+              //           color: black,
+              //         ),
+              //       ),
+              //     ),
+              //     Text(
+              //       _userRole,
+              //       style: const TextStyle(
+              //         fontSize: 20.0,
+              //         color: smsResendBlue,
+              //       ),
+              //     )
+              //   ],
+              // ),
+              // boxSIZED_10,
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text.rich(
+              //         TextSpan(
+              //           children: [
+              //             const TextSpan(
+              //               text: "PassWord : ", // First part of the text
+              //               style: TextStyle(
+              //                 fontSize: 20.0,
+              //                 color: black, // Color for the first part
+              //               ),
+              //             ),
+              //             TextSpan(
+              //               text: _passWord,
+              //               style: const TextStyle(
+              //                 fontSize: 20.0,
+              //                 color:
+              //                     smsResendBlue, // Color for the second part
+              //                 overflow: TextOverflow.ellipsis,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              boxSIZED_15,
+              Align(
+                alignment: Alignment.bottomRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: editColor,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    customLogger.i("edit button clicked");
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return EditDetailsPopup(
+                          fullName: _fullName,
+                          email: _email,
+                          dob: _dob,
+                          userRole: _userRole,
+                          password: _passWord,
+                        );
+                      },
+                    );
+                  },
+                  child: const Text(
+                    "Edit",
+                    style: TextStyle(
+                      color: black,
+                    ),
+                  ),
+                ),
+              ),
+              boxSIZED_10,
               const SizedBox(
                 child: Divider(
                   color: black,
                   thickness: 2,
                 ),
               ),
-              boxSIZED_15,
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              const TextSpan(
-                                text: "Full Name: ",
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: black,
-                                ),
-                              ),
-                              TextSpan(
-                                text: _fullName,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color:
-                                      smsResendBlue, // Color for the second part
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  boxSIZED_10,
-                  Row(
-                    children: [
-                      const Text(
-                        "Email : ",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: black,
-                        ),
-                        // overflow: TextOverflow.ellipsis,
-                      ),
-                      Expanded(
-                        child: Text(
-                          _email,
-                          style: const TextStyle(
-                            fontSize: 20.0,
-                            color: smsResendBlue,
-                          ),
-                          // overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  boxSIZED_10,
-                  Row(
-                    children: [
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Date Of Birth : ",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: black,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        _dob,
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                          color: smsResendBlue,
-                        ),
-                      )
-                    ],
-                  ),
-                  boxSIZED_10,
-                  Row(
-                    children: [
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "User Role : ",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: black,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        _userRole,
-                        style: const TextStyle(
-                          fontSize: 20.0,
-                          color: smsResendBlue,
-                        ),
-                      )
-                    ],
-                  ),
-                  boxSIZED_10,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              const TextSpan(
-                                text: "PassWord : ", // First part of the text
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: black, // Color for the first part
-                                ),
-                              ),
-                              TextSpan(
-                                text: _passWord,
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color:
-                                      smsResendBlue, // Color for the second part
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  boxSIZED_10,
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: editColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 15,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        customLogger.i("edit button clicked");
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return EditDetailsPopup(
-                              fullName: _fullName,
-                              email: _email,
-                              dob: _dob,
-                              userRole: _userRole,
-                              password: _passWord,
-                            );
-                          },
-                        );
-                      },
-                      child: const Text(
-                        "Edit",
-                        style: TextStyle(
-                          color: black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  boxSIZED_10,
-                  const SizedBox(
-                    child: Divider(
-                      color: black,
-                      thickness: 2,
-                    ),
-                  ),
-                  boxSIZED_10,
-                  const Text(
-                    "Personal Data",
-                    style: TextStyle(
-                      color: topicGreen,
-                      fontSize: 25.0,
-                    ),
-                  ),
+              boxSIZED_10,
+              const Text(
+                "Personal Data",
+                style: TextStyle(
+                  color: topicGreen,
+                  fontSize: 25.0,
+                ),
+              ),
 
-                  /* if the personal data has been provided then the 
+              /* if the personal data has been provided then the 
                     using ('userUniqueId') we can create a logic to visualize those data for this screen.
 
                     getUserUniqueId() will return the string related to that.
                   */
 
-                  boxSIZED_10,
-                  const PersonalDataNotExist(),
-                  boxSIZED_15,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: editColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      customLogger.i("pac creation clicked");
-                      Navigator.pushNamed(
-                        context,
-                        "/paccreatingscreen",
-                      );
-                    },
-                    child: const Text(
-                      "Create PAC",
-                      style: TextStyle(
-                        color: black,
-                      ),
-                    ),
+              // boxSIZED_10,
+              // const PersonalDataNotExist(),
+              boxSIZED_15,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: editColor,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
                   ),
-                  boxSIZED_20,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: errorRed,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      customLogger.i("unsubscribe button clicked");
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   "/pacscreen",
-                      // );
-                    },
-                    child: const Text(
-                      "Unsubscribe",
-                      style: TextStyle(
-                        color: whiteColor,
-                      ),
-                    ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  boxSIZED_15,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: topicGreen,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      customLogger.i("Go to PAC Screen");
-                      Navigator.pushNamed(
-                        context,
-                        "/pacscreen",
-                      );
-                    },
-                    child: const Text(
-                      "PAC",
-                      style: TextStyle(
-                        color: whiteColor,
-                      ),
-                    ),
+                ),
+                onPressed: () {
+                  customLogger.i("pac creation clicked");
+                  Navigator.pushNamed(
+                    context,
+                    "/paccreatingscreen",
+                  );
+                },
+                child: const Text(
+                  "Create PAC",
+                  style: TextStyle(
+                    color: black,
                   ),
-                ],
+                ),
+              ),
+              boxSIZED_20,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: errorRed,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  customLogger.i("unsubscribe button clicked");
+                  // Navigator.pushNamed(
+                  //   context,
+                  //   "/pacscreen",
+                  // );
+                },
+                child: const Text(
+                  "Unsubscribe",
+                  style: TextStyle(
+                    color: whiteColor,
+                  ),
+                ),
+              ),
+              boxSIZED_15,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: topicGreen,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  customLogger.i("Go to PAC Screen");
+                  Navigator.pushNamed(
+                    context,
+                    "/pacscreen",
+                  );
+                },
+                child: const Text(
+                  "PAC",
+                  style: TextStyle(
+                    color: whiteColor,
+                  ),
+                ),
               ),
             ],
           ),
+          // ],
         ),
       ),
     );

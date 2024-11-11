@@ -260,10 +260,10 @@ class _EditDetailsPopupState extends State<EditDetailsPopup> {
                 readOnly: true,
               ),
             ),
-            _buildTextField(
-              'User Role',
-              _userRoleController,
-            ),
+            // _buildTextField(
+            //   'User Role',
+            //   _userRoleController,
+            // ),
             _buildTextField(
               'Password',
               _passwordController,
