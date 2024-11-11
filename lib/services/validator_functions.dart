@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; // for bcrypt
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // for bcrypt
 
 String? validateEmail(String? value) {
   // Basic null/empty check
@@ -51,41 +52,56 @@ String? validatePassword(String? value) {
   return null; // If password meets all criteria
 }
 
-String? validateFirstName(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your first name';
-  }
+// String? validateFirstName(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your first name';
+//   }
 
-  // Check if the first name contains any spaces
-  if (value.contains(' ')) {
-    return 'First name should not contain spaces';
-  }
+//   // Check if the first name contains any spaces
+//   if (value.contains(' ')) {
+//     return 'First name should not contain spaces';
+//   }
 
-  return null; // Return null if valid
-}
+//   return null; // Return null if valid
+// }
 
-String? validateLastName(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your last name';
-  }
+// String? validateLastName(String? value) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your last name';
+//   }
 
-  // Check if the last name contains any spaces
-  if (value.contains(' ')) {
-    return 'Last name should not contain spaces';
-  }
+//   // Check if the last name contains any spaces
+//   if (value.contains(' ')) {
+//     return 'Last name should not contain spaces';
+//   }
 
-  return null; // Return null if valid
-}
+//   return null; // Return null if valid
+// }
 
-String? validateFullName(String? value, String firstName, String lastName) {
+// String? validateFullName(String? value, String firstName, String lastName) {
+//   if (value == null || value.isEmpty) {
+//     return 'Please enter your full name';
+//   }
+
+//   // Ensure the full name contains both the first and last names as words
+//   if (!value.toLowerCase().contains(firstName.toLowerCase()) ||
+//       !value.toLowerCase().contains(lastName.toLowerCase())) {
+//     return 'Full name must include both first and last names';
+//   }
+
+//   return null; // Return null if valid
+// }
+
+String? validateFullName(String? value) {
   if (value == null || value.isEmpty) {
     return 'Please enter your full name';
   }
 
-  // Ensure the full name contains both the first and last names as words
-  if (!value.toLowerCase().contains(firstName.toLowerCase()) ||
-      !value.toLowerCase().contains(lastName.toLowerCase())) {
-    return 'Full name must include both first and last names';
+  // Regular expression to ensure full name contains only letters and spaces between words
+  RegExp nameRegExp = RegExp(r'^[a-zA-Z]+(?: [a-zA-Z]+)*$');
+
+  if (!nameRegExp.hasMatch(value)) {
+    return 'Full name can only contain letters and spaces';
   }
 
   return null; // Return null if valid
@@ -118,11 +134,9 @@ String? validateDOB(String? value) {
 //   return BCrypt.checkpw(password, hashedPassword);
 // }
 
-String? validateTimeOfBirth(TimeOfDay selectedTime) {
-  final now = TimeOfDay.now();
-  if (selectedTime.hour > now.hour ||
-      (selectedTime.hour == now.hour && selectedTime.minute > now.minute)) {
-    return 'Time of birth cannot be in the future.';
+String? validateTimeOfBirth(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Time of birth cannot be null';
   }
   return null; // Return null if valid
 }
@@ -130,7 +144,7 @@ String? validateTimeOfBirth(TimeOfDay selectedTime) {
 String? validateLocation(String location) {
   if (location.isEmpty) {
     return 'Location cannot be empty';
-  } else if (location.length < 2) {
+  } else if (location.length < 3) {
     return 'Location name is too short';
   }
   return null; // Return null if valid

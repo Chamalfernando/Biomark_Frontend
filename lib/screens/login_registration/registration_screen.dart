@@ -1,4 +1,6 @@
+import 'package:biomark/resources/logger.dart';
 import 'package:biomark/resources/theme.dart';
+import 'package:biomark/services/encyption_service.dart';
 import 'package:biomark/services/validator_functions.dart';
 import 'package:biomark/widgets/Topic.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +14,14 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    customLogger.i("navigate to the registration screen");
+  }
+
+  // final TextEditingController firstNameController = TextEditingController();
+  // final TextEditingController lastNameController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -49,17 +57,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         title: const Text(
           'Sign up',
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         backgroundColor: primaryGreen,
         centerTitle: true,
       ),
-      backgroundColor: whiteColor,
+      backgroundColor: Colors.grey.shade100,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   boxSIZED_20,
                   const CircleAvatar(
@@ -68,109 +78,65 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       'assets/BioMark.png',
                     ),
                   ),
-                  boxSIZED_40,
-                  const CommonTopic(
-                    topic: "Sign Up",
-                  ),
-                  boxSIZED_20,
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Provide information for SignUp",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: black,
-                      ),
+                  boxSIZED_30,
+                  const Text(
+                    "Join BioMark Today",
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: primaryGreen,
                     ),
                   ),
                   boxSIZED_10,
+                  const Text(
+                    "Create your account below",
+                    style: TextStyle(fontSize: 16, color: black),
+                  ),
+                  boxSIZED_30,
                   Form(
                     key: _registrationFormGlobalKey,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        boxSIZED_15,
                         TextFormField(
-                          controller: firstNameController,
+                          controller: fullNameController,
                           decoration: InputDecoration(
-                            labelText: "First Name",
-                            fillColor: primaryGreen,
+                            labelText: "Full Name",
+                            labelStyle: const TextStyle(color: black),
+                            fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                             prefixIcon: const Icon(
                               Icons.person,
+                              color: primaryGreen,
                             ),
                           ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          validator: (value) => validateFirstName(value),
-                          onSaved: (value) {
-                            firstNameController.text = value!;
-                          },
-                        ),
-                        boxSIZED_15,
-                        TextFormField(
-                          controller: lastNameController,
-                          decoration: InputDecoration(
-                            labelText: "Last Name",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person_2,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
-                          validator: (value) => validateLastName(value),
-                          onSaved: (value) {
-                            lastNameController.text = value!;
-                          },
-                        ),
-                        boxSIZED_15,
-                        TextFormField(
-                          controller: fullNameController,
-                          decoration: InputDecoration(
-                            labelText: "Full Name",
-                            fillColor: primaryGreen,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.person_3,
-                            ),
-                          ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
+                          style: const TextStyle(height: 2.5),
                           onSaved: (value) {
                             fullNameController.text = value!;
                           },
                           validator: (value) {
-                            return validateFullName(
-                                value,
-                                firstNameController.text,
-                                lastNameController.text);
+                            return validateFullName(value);
                           },
                         ),
-                        boxSIZED_15,
+                        boxSIZED_20,
                         TextFormField(
                           controller: dobController,
-                          keyboardType: TextInputType.datetime,
+                          // keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             labelText: "Date Of Birth",
-                            fillColor: primaryGreen,
+                            labelStyle: const TextStyle(color: black),
+                            fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                             prefixIcon: IconButton(
-                              icon: const Icon(Icons.calendar_today),
+                              icon: const Icon(Icons.calendar_today,
+                                  color: primaryGreen),
                               onPressed: () {
                                 _selectDate(
                                   context,
@@ -179,48 +145,46 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ),
                           // readOnly: true, // Prevent user from manually editing the date
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
+                          style: const TextStyle(height: 2.5),
                           onSaved: (value) {
                             dobController.text = value!;
                           },
                           validator: (value) => validateDOB(value),
                         ),
-                        boxSIZED_15,
+                        boxSIZED_20,
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
                             labelText: "Email",
-                            fillColor: primaryGreen,
+                            labelStyle: const TextStyle(color: black),
+                            fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            prefixIcon: const Icon(
-                              Icons.email,
-                            ),
+                            prefixIcon:
+                                const Icon(Icons.email, color: primaryGreen),
                           ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
+                          style: const TextStyle(height: 2.5),
                           onSaved: (value) {
                             emailController.text = value!;
                           },
                           validator: validateEmail,
                         ),
-                        boxSIZED_15,
+                        boxSIZED_20,
                         TextFormField(
                           controller: passwordController,
                           decoration: InputDecoration(
                             labelText: "Password",
-                            fillColor: primaryGreen,
+                            labelStyle: const TextStyle(color: black),
+                            fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                             prefixIcon: const Icon(
-                              Icons.password,
+                              Icons.lock,
+                              color: primaryGreen,
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
@@ -236,9 +200,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               },
                             ),
                           ),
-                          style: const TextStyle(
-                            height: 2.5,
-                          ),
+                          style: const TextStyle(height: 2.5),
                           obscureText: !_obscurePassword,
                           showCursor: true,
                           validator: validatePassword,
@@ -246,55 +208,48 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             passwordController.text = value!;
                           },
                         ),
-                        boxSIZED_15,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: black,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 40,
-                                  vertical: 15,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                        boxSIZED_30,
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryGreen,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40,
+                                vertical: 15,
                               ),
-                              onPressed: () {
-                                if (_registrationFormGlobalKey.currentState!
-                                    .validate()) {
-                                  _registrationFormGlobalKey.currentState!
-                                      .save();
-                                  // _registrationFormGlobalKey.currentState!
-                                  //     .reset();
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 5,
+                            ),
+                            onPressed: () {
+                              if (_registrationFormGlobalKey.currentState!
+                                  .validate()) {
+                                _registrationFormGlobalKey.currentState!.save();
+                                // _registrationFormGlobalKey.currentState!
+                                //     .reset();
 
-                                  // Navigate to SecurityQuestionsScreen with the collected form data
-                                  Navigator.pushNamed(
-                                    context,
-                                    "/securityquestscreen",
-                                    arguments: {
-                                      'firstName': firstNameController.text,
-                                      'lastName': lastNameController.text,
-                                      'fullName': fullNameController.text,
-                                      'dob': dobController.text,
-                                      'email': emailController.text,
-                                      'pw': passwordController.text,
-                                    },
-                                  );
-                                  // setState(() {
-                                  //   // logic to handle login with databases.
-                                  // });
-                                }
-                              },
-                              child: const Text(
-                                "Next",
-                                style: TextStyle(
-                                  color: whiteColor,
-                                ),
+                                // Navigate to SecurityQuestionsScreen with the collected form data
+                                Navigator.pushNamed(
+                                  context,
+                                  "/securityquestscreen",
+                                  arguments: {
+                                    'fullName': fullNameController.text,
+                                    'dob': dobController.text,
+                                    'email': emailController.text,
+                                    'pw': passwordController.text,
+                                  },
+                                );
+                              }
+                            },
+                            child: const Text(
+                              "Next",
+                              style: TextStyle(
+                                color: whiteColor,
+                                fontSize: 16,
                               ),
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),

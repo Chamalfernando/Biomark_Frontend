@@ -45,6 +45,9 @@ dependencies:
   bcrypt:
   http:
   shared_preferences:
+  logger:
+  encrypt:
+  flutter_secure_storage:
 
 dev_dependencies:
   flutter_test:
